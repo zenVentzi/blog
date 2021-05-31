@@ -1,6 +1,5 @@
-import Head from 'next/head'
+const Index = () => {
+  return <div>Index</div>;
+};
 
-export default function Index({ preview, allPosts }) {
-return <div>Index</div>
-}
-
+export default Index;
