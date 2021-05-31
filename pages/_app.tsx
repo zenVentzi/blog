@@ -1,6 +1,6 @@
 import type { AppProps /*, AppContext */ } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
-import Layout from '../modules/common/Layout';
+import { Layout } from '../modules/common/layout';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (

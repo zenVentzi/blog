@@ -1,5 +1,5 @@
 import { Grid, GridItem } from '@chakra-ui/react';
-import Sidebar from './layout/Sidebar';
+import Sidebar from './Sidebar';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -12,7 +12,6 @@ const Layout = ({ children }: LayoutProps) => {
         <Sidebar />
       </GridItem>
       <GridItem colSpan={1} bg="papayawhip">
-        Layout <br />
         {children}
       </GridItem>
     </Grid>
