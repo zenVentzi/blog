@@ -1,9 +1,5 @@
 import { Box, Heading, Text } from '@chakra-ui/layout';
-
-type Post = {
-  title: string;
-  contentPreview: string;
-};
+import { Post } from '../common';
 
 type BlogPostPreviewProps = {
   post: Post;
