@@ -15,9 +15,6 @@ type PostProps = {
   post: SerializedPost;
 };
 
-const Test = () => <div>Test</div>;
-const components = { Test };
-
 const PostPage = ({ post }: PostProps) => {
   // console.log(post.content);
   return (
@@ -26,8 +23,18 @@ const PostPage = ({ post }: PostProps) => {
         <Box w="80ch">
           <Heading mb="15px">{post.title}</Heading>
           {/* <div dangerouslySetInnerHTML={{ __html: post.content }} /> */}
-          <MDXRemote {...post.content} components={components} />
-          {/* <h1>H1</h1>text */}
+          <MDXRemote
+            {...post.content}
+            components={
+              {
+                /*
+                  here you can override global components e.g. 
+                  h1: null 
+                  etc.
+                */
+              }
+            }
+          />
         </Box>
       </Center>
     </Box>
