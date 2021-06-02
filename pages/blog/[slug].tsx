@@ -1,7 +1,9 @@
 import { Box, Center, Heading } from '@chakra-ui/layout';
 import * as contentful from 'contentful';
+import { serialize } from 'next-mdx-remote/serialize';
+import { MDXRemote } from 'next-mdx-remote';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Post } from '../../modules/common';
+import { SerializedPost, UnserializedPost } from '../../modules/common';
 
 const contentfulClient = contentful.createClient({
   // FIXME
@@ -10,16 +12,22 @@ const contentfulClient = contentful.createClient({
 });
 
 type PostProps = {
-  post: Post;
+  post: SerializedPost;
 };
 
+const Test = () => <div>Test</div>;
+const components = { Test };
+
 const PostPage = ({ post }: PostProps) => {
+  // console.log(post.content);
   return (
     <Box p="30px">
       <Center>
         <Box w="80ch">
           <Heading mb="15px">{post.title}</Heading>
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          {/* <div dangerouslySetInnerHTML={{ __html: post.content }} /> */}
+          <MDXRemote {...post.content} components={components} />
+          {/* <h1>H1</h1>text */}
         </Box>
       </Center>
     </Box>
@@ -35,7 +43,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
     throw Error(`Slug not available`);
   }
 
-  const entry = await contentfulClient.getEntries<Post>({
+  const entry = await contentfulClient.getEntries<UnserializedPost>({
     content_type: 'blogPost',
     'fields.slug': context.params.slug,
   });
@@ -43,15 +51,42 @@ export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
   // console.log('entry');
   // console.dir(entry, { depth: null });
 
-  const post: Post | null | undefined = entry.items.map((item) => ({
-    id: item.sys.id,
-    title: item.fields.title,
-    content: item.fields.content,
-    contentPreview: item.fields.contentPreview,
-    slug: item.fields.slug,
-  }))[0];
+  const unserializedPost: UnserializedPost | null | undefined = entry.items.map(
+    (item) => ({
+      id: item.sys.id,
+      title: item.fields.title,
+      content: item.fields.content,
+      contentPreview: item.fields.contentPreview,
+      slug: item.fields.slug,
+    })
+  )[0];
 
-  // TODO: if null, redirect or do something
+  // if (!post) {
+
+  // // TODO: if null, redirect or do something
+  // }
+
+  // const source = 'Some **mdx** text, with a componen <Test />';
+  //   const source = `# Content here
+  // ## Heading 2
+  // ### Heading 3
+
+  // > quote`;
+  const source = '# Heagin1';
+  console.log(unserializedPost.content);
+
+  // const serializedContent = await serialize(unserializedPost!.content);
+  // const serializedContentPreview = await serialize(
+  //   unserializedPost!.contentPreview
+  // );
+
+  const serializedContent = await serialize(source);
+  const serializedContentPreview = await serialize(source);
+  const serializedPost: SerializedPost = {
+    ...unserializedPost,
+    content: serializedContent,
+    contentPreview: serializedContentPreview,
+  };
 
   // const post: Post = {
   //   id: '',
@@ -63,12 +98,12 @@ export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
   // };
 
   return {
-    props: { post }, // will be passed to the page component as props
+    props: { post: serializedPost }, // will be passed to the page component as props
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await contentfulClient.getEntries<Post>({
+  const res = await contentfulClient.getEntries<SerializedPost>({
     content_type: 'blogPost',
   });
   // console.dir(res, { depth: null });
