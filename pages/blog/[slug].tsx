@@ -73,22 +73,17 @@ export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
   // // TODO: if null, redirect or do something
   // }
 
-  // const source = 'Some **mdx** text, with a componen <Test />';
-  //   const source = `# Content here
-  // ## Heading 2
-  // ### Heading 3
+  const serializedContent = await serialize(unserializedPost!.content);
+  const serializedContentPreview = await serialize(
+    unserializedPost!.contentPreview
+  );
 
-  // > quote`;
-  const source = '# Heagin1';
-  console.log(unserializedPost.content);
-
-  // const serializedContent = await serialize(unserializedPost!.content);
-  // const serializedContentPreview = await serialize(
-  //   unserializedPost!.contentPreview
-  // );
-
-  const serializedContent = await serialize(source);
-  const serializedContentPreview = await serialize(source);
+  //#region dummy test mdx
+  // const source = '# Heagin1';
+  // console.log(unserializedPost.content);
+  // const serializedContent = await serialize(source);
+  // const serializedContentPreview = await serialize(source);
+  //#endregion
   const serializedPost: SerializedPost = {
     ...unserializedPost,
     content: serializedContent,
