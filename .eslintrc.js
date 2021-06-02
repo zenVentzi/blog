@@ -10,7 +10,7 @@ module.exports = {
   overrides: [
     // This configuration will apply only to TypeScript files
     {
-      files: ['**/*.ts', '**/*.tsx'],
+      files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
       parser: '@typescript-eslint/parser',
       settings: { react: { version: 'detect' } },
       env: {
