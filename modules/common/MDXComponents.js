@@ -57,51 +57,6 @@ const Quote = (props) => {
   );
 };
 
-const DocsHeading = (props) => (
-  <Heading
-    css={{
-      scrollMarginTop: '100px',
-      scrollSnapMargin: '100px', // Safari
-      '&[id]': {
-        pointerEvents: 'none',
-      },
-      '&[id]:before': {
-        display: 'block',
-        height: ' 6rem',
-        marginTop: '-6rem',
-        visibility: 'hidden',
-        content: `""`,
-      },
-      '&[id]:hover a': { opacity: 1 },
-    }}
-    {...props}
-    mb="1em"
-    mt="2em"
-  >
-    <Box pointerEvents="auto">
-      {props.children}
-      {props.id && (
-        <Box
-          aria-label="anchor"
-          as="a"
-          color="blue.500"
-          fontWeight="normal"
-          outline="none"
-          _focus={{
-            opacity: 1,
-            boxShadow: 'outline',
-          }}
-          opacity="0"
-          ml="0.375rem"
-          href={`#${props.id}`}
-        >
-          #
-        </Box>
-      )}
-    </Box>
-  </Heading>
-);
-
 const Hr = () => {
   const { colorMode } = useColorMode();
   const borderColor = {
@@ -120,12 +75,12 @@ const MDXComponents = {
   //   return <Heading as="h1" size="xl" my={4} {...props} />;
   // },
 
-  h1: (props) => <Heading as="h1" size="xl" my={4} {...props} />,
-  h2: (props) => <DocsHeading as="h2" size="lg" fontWeight="bold" {...props} />,
-  h3: (props) => <DocsHeading as="h3" size="md" fontWeight="bold" {...props} />,
-  h4: (props) => <DocsHeading as="h4" size="sm" fontWeight="bold" {...props} />,
-  h5: (props) => <DocsHeading as="h5" size="sm" fontWeight="bold" {...props} />,
-  h6: (props) => <DocsHeading as="h6" size="xs" fontWeight="bold" {...props} />,
+  h1: (props) => <Heading as="h1" size="xl" {...props} />,
+  h2: (props) => <Heading as="h2" size="lg" fontWeight="bold" {...props} />,
+  h3: (props) => <Heading as="h3" size="md" fontWeight="bold" {...props} />,
+  h4: (props) => <Heading as="h4" size="sm" fontWeight="bold" {...props} />,
+  h5: (props) => <Heading as="h5" size="sm" fontWeight="bold" {...props} />,
+  h6: (props) => <Heading as="h6" size="xs" fontWeight="bold" {...props} />,
   inlineCode: (props) => (
     <Code colorScheme="yellow" fontSize="0.84em" {...props} />
   ),
