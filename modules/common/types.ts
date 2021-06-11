@@ -1,7 +1,6 @@
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 export type SerializedPost = {
-  id: string;
   title: string;
   contentPreview: MDXRemoteSerializeResult;
   content: MDXRemoteSerializeResult;
@@ -9,7 +8,6 @@ export type SerializedPost = {
 };
 
 export type UnserializedPost = {
-  id: string;
   title: string;
   contentPreview: string;
   content: string;

@@ -3,6 +3,7 @@ import * as contentful from 'contentful';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import matter from 'gray-matter';
 import { SerializedPost, UnserializedPost } from '../../modules/common';
 
 const contentfulClient = contentful.createClient({
@@ -58,14 +59,21 @@ export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
   // console.log('entry');
   // console.dir(entry, { depth: null });
 
+  // TODO: map just the first item
   const unserializedPost: UnserializedPost | null | undefined = entry.items.map(
-    (item) => ({
-      id: item.sys.id,
-      title: item.fields.title,
-      content: item.fields.content,
-      contentPreview: item.fields.contentPreview,
-      slug: item.fields.slug,
-    })
+    (item) => {
+      const { content, data } = matter(item.fields.content);
+      const contentPreview = content.substring(0, 200);
+
+      // TODO: check data fields if empty
+
+      return {
+        title: data.title,
+        content,
+        contentPreview,
+        slug: data.slug,
+      };
+    }
   )[0];
 
   // if (!post) {
@@ -105,16 +113,18 @@ export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await contentfulClient.getEntries<SerializedPost>({
+  const res = await contentfulClient.getEntries<UnserializedPost>({
     content_type: 'blogPost',
   });
   // console.dir(res, { depth: null });
-  const posts = res.items.map((item) => {
-    return { ...item.fields, id: item.sys.id };
+  const paths = res.items.map((item) => {
+    const { content, data } = matter(item.fields.content);
+
+    return { params: { slug: data.slug } };
   });
 
   return {
-    paths: posts.map((post) => ({ params: { slug: post.slug } })),
+    paths,
     fallback: false, // See the "fallback" section below
   };
 };
