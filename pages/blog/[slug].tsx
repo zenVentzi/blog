@@ -24,6 +24,9 @@ const PostPage = ({ post }: PostProps) => {
         <Box w="80ch">
           <Heading mb="15px">{post.title}</Heading>
           {/* <div dangerouslySetInnerHTML={{ __html: post.content }} /> */}
+          {post.tags.map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
           <MDXRemote
             {...post.content}
             components={
@@ -69,6 +72,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
 
       return {
         title: data.title,
+        tags: data.tags,
         content,
         contentPreview,
         slug: data.slug,
