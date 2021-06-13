@@ -7,7 +7,7 @@ type PostTagsProps = {
 
 const PostTags = ({ tags }: PostTagsProps) => {
   return (
-    <HStack>
+    <HStack mb="2">
       {tags.map((tag) => (
         <Tag key={tag}>{tag}</Tag>
       ))}
