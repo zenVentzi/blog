@@ -1,4 +1,4 @@
-import { Box, Avatar, Flex, Text, Button } from '@chakra-ui/react';
+import { Box, Avatar, Flex, Text, Button, VStack } from '@chakra-ui/react';
 import CustomLink from '../CustomLink';
 
 const Sidebar = () => {
@@ -29,7 +29,11 @@ const Sidebar = () => {
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s
         </Text>
-        <CustomLink href="/about">About</CustomLink>
+        <Box h="10" />
+        <VStack alignSelf="flex-start">
+          <CustomLink href="/about">About</CustomLink>
+          <CustomLink href="/">Home</CustomLink>
+        </VStack>
       </Flex>
     </Box>
   );
