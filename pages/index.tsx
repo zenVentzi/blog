@@ -1,4 +1,4 @@
-import { Box, Flex, VStack } from '@chakra-ui/react';
+import { Box, Flex, Divider, VStack, Center } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 import * as contentful from 'contentful';
 import { SerializedPost, UnserializedPost } from '../modules/common';
@@ -19,7 +19,15 @@ type IndexProps = {
 const Index = ({ posts }: IndexProps) => {
   return (
     <div>
-      <VStack spacing="20px" pt="30px">
+      <VStack
+        spacing="20px"
+        pt="30px"
+        divider={
+          // <Center>
+          <Divider width="40%" />
+          // </Center>
+        }
+      >
         {posts.map((post) => {
           return <BlogPostPreivew key={post.slug} post={post} />;
         })}
