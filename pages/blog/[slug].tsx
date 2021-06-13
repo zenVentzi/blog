@@ -22,7 +22,9 @@ const PostPage = ({ post }: PostProps) => {
     <Box p="30px" h="100%">
       <Center>
         <Box w="80ch">
-          <Heading mb="15px">{post.title}</Heading>
+          <Heading as="h1" size="2xl" mb="15px">
+            {post.title}
+          </Heading>
           {/* <div dangerouslySetInnerHTML={{ __html: post.content }} /> */}
           {post.tags.map((tag) => (
             <span key={tag}>{tag}</span>

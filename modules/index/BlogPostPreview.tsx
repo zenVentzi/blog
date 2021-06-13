@@ -9,7 +9,7 @@ type BlogPostPreviewProps = {
 const BlogPostPreview = ({ post }: BlogPostPreviewProps) => {
   return (
     <Box w="80ch">
-      <Heading size="lg">{post.title}</Heading>
+      <Heading size="2xl">{post.title}</Heading>
       {/* <div dangerouslySetInnerHTML={{ __html: post.contentPreview }} /> */}
       <MDXRemote {...post.contentPreview} /*  components={components}  */ />
     </Box>
