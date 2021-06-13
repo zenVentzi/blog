@@ -3,7 +3,7 @@ import CustomLink from '../CustomLink';
 
 const Sidebar = () => {
   return (
-    <Box h="100%" w="100%" p="10">
+    <Box h="100%" w="100%" p="10" bg="black" boxShadow="10px 0 5px -2px white">
       <Flex direction="column" /* alignItems="center" */>
         <Avatar
           name="Zen Ventzi"
