@@ -19,7 +19,7 @@ type PostProps = {
 const PostPage = ({ post }: PostProps) => {
   // console.log(post.content);
   return (
-    <Box p="30px">
+    <Box p="30px" h="100%">
       <Center>
         <Box w="80ch">
           <Heading mb="15px">{post.title}</Heading>

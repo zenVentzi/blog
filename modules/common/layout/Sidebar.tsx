@@ -1,9 +1,19 @@
-import { Box, Avatar, Flex, Text } from '@chakra-ui/react';
+import { Box, Avatar, Flex, Text, Button } from '@chakra-ui/react';
 import CustomLink from '../CustomLink';
 
 const Sidebar = () => {
   return (
-    <Box h="100%" w="100%" p="10" bg="black" boxShadow="10px 0 5px -2px white">
+    <Box
+      h="100%"
+      w="100%"
+      p="10"
+      // bg="black"
+      borderRight="2px"
+      // borderColor="white"
+      // shadow doesn't currently work because of grid
+      // boxShadow="10px 0 5px -2px red"
+      zIndex={1}
+    >
       <Flex direction="column" /* alignItems="center" */>
         <Avatar
           name="Zen Ventzi"
