@@ -4,7 +4,13 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import matter from 'gray-matter';
-import { SerializedPost, UnserializedPost } from '../../modules/common';
+import {
+  PostTags,
+  SerializedPost,
+  UnserializedPost,
+} from '../../modules/common';
+import React from 'react';
+import { HStack, Tag } from '@chakra-ui/react';
 
 const contentfulClient = contentful.createClient({
   // FIXME
@@ -26,9 +32,7 @@ const PostPage = ({ post }: PostProps) => {
             {post.title}
           </Heading>
           {/* <div dangerouslySetInnerHTML={{ __html: post.content }} /> */}
-          {post.tags.map((tag) => (
-            <span key={tag}>{tag}</span>
-          ))}
+          <PostTags tags={post.tags} />
           <MDXRemote
             {...post.content}
             components={
