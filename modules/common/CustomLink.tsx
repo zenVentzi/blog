@@ -1,11 +1,16 @@
-import { useColorMode, Link } from '@chakra-ui/react';
+import { useColorMode, Link, LinkProps } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { ReactNode } from 'react';
 
-type CustomLinkProps = { href: string; children: ReactNode };
+type CustomLinkProps = {
+  href: string;
+  otherProps?: LinkProps;
+  children: ReactNode;
+};
 
 const CustomLink = (props: CustomLinkProps) => {
   const { colorMode } = useColorMode();
+  const restProps = props.otherProps ?? {};
 
   const color = {
     light: 'hsl(208, 99%, 44%)',
@@ -18,13 +23,20 @@ const CustomLink = (props: CustomLinkProps) => {
   if (isInternalLink) {
     return (
       <NextLink href={href} passHref>
-        <Link color={color[colorMode]}>{props.children}</Link>
+        <Link color={color[colorMode]} {...props.otherProps}>
+          {props.children}
+        </Link>
       </NextLink>
     );
   }
 
   return (
-    <Link color={color[colorMode]} href={props.href} isExternal={true}>
+    <Link
+      color={color[colorMode]}
+      href={props.href}
+      isExternal={true}
+      {...props.otherProps}
+    >
       {props.children}
     </Link>
   );
