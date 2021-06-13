@@ -1,24 +1,27 @@
 import { Box, Flex, VStack } from '@chakra-ui/react';
+import { GetStaticProps } from 'next';
+import * as contentful from 'contentful';
+import { SerializedPost, UnserializedPost } from '../modules/common';
 import { BlogPostPreivew } from '../modules/index';
+import matter from 'gray-matter';
+import { serialize } from 'next-mdx-remote/serialize';
 
-const Index = () => {
+const contentfulClient = contentful.createClient({
+  // FIXME
+  space: process.env.CONTENTFUL_SPACE_ID as string,
+  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN as string,
+});
+
+type IndexProps = {
+  posts: SerializedPost[];
+};
+
+const Index = ({ posts }: IndexProps) => {
   return (
     <div>
       <VStack spacing="20px" pt="30px">
-        {[...Array(40).keys()].map((i) => {
-          return (
-            <BlogPostPreivew
-              key={i}
-              post={{
-                title: i + ' Titleeee',
-                // @ts-ignore
-                content: '',
-                // @ts-ignore
-                contentPreview:
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
-              }}
-            />
-          );
+        {posts.map((post) => {
+          return <BlogPostPreivew key={post.slug} post={post} />;
         })}
       </VStack>
     </div>
@@ -26,3 +29,48 @@ const Index = () => {
 };
 
 export default Index;
+
+export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
+  // console.log(context.params);
+
+  const entry = await contentfulClient.getEntries<UnserializedPost>({
+    content_type: 'blogPost',
+  });
+
+  // console.log('entry');
+  // console.dir(entry, { depth: null });
+
+  const unserializedPosts: UnserializedPost[] | null | undefined =
+    entry.items.map((item) => {
+      const { content, data } = matter(item.fields.content);
+      const contentPreview = content.substring(0, 200);
+
+      // TODO: check data fields if empty
+
+      return {
+        title: data.title,
+        tags: data.tags,
+        content,
+        contentPreview,
+        slug: data.slug,
+      };
+    });
+
+  const serializedPosts: SerializedPost[] = await Promise.all(
+    unserializedPosts.map(async (unPost) => {
+      const serializedContent = await serialize(unPost.content);
+      const serializedContentPreview = await serialize(unPost.contentPreview);
+      const serializedPost: SerializedPost = {
+        ...unPost,
+        content: serializedContent,
+        contentPreview: serializedContentPreview,
+      };
+
+      return serializedPost;
+    })
+  );
+
+  return {
+    props: { posts: serializedPosts },
+  };
+};
