@@ -1,7 +1,21 @@
-import { Box, Avatar, Flex, Text, Button, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Avatar,
+  Flex,
+  Text,
+  Button,
+  VStack,
+  LinkProps,
+} from '@chakra-ui/react';
 import CustomLink from '../CustomLink';
 
 const Sidebar = () => {
+  const linkStyle: LinkProps = {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 'xl',
+  };
+
   return (
     <Box
       h="100%"
@@ -31,8 +45,12 @@ const Sidebar = () => {
         </Text>
         <Box h="10" />
         <VStack alignSelf="flex-start">
-          <CustomLink href="/about">About</CustomLink>
-          <CustomLink href="/">Home</CustomLink>
+          <CustomLink otherProps={linkStyle} href="/about">
+            About
+          </CustomLink>
+          <CustomLink otherProps={linkStyle} href="/">
+            Home
+          </CustomLink>
         </VStack>
       </Flex>
     </Box>
