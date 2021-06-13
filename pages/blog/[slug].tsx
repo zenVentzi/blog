@@ -5,6 +5,7 @@ import { MDXRemote } from 'next-mdx-remote';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import matter from 'gray-matter';
 import {
+  LastUpdate,
   PostTags,
   SerializedPost,
   UnserializedPost,
@@ -31,6 +32,7 @@ const PostPage = ({ post }: PostProps) => {
           <Heading as="h1" size="2xl" mb="15px">
             {post.title}
           </Heading>
+          <LastUpdate lastUpdate={post.lastUpdate} />
           {/* <div dangerouslySetInnerHTML={{ __html: post.content }} /> */}
           <PostTags tags={post.tags} />
           <MDXRemote
@@ -79,6 +81,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
       return {
         title: data.title,
         tags: data.tags,
+        lastUpdate: data.lastUpdate,
         content,
         contentPreview,
         slug: data.slug,

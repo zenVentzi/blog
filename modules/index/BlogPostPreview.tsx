@@ -1,6 +1,6 @@
 import { Box, Heading, Text } from '@chakra-ui/layout';
 import { MDXRemote } from 'next-mdx-remote';
-import { CustomLink, PostTags, SerializedPost } from '../common';
+import { CustomLink, LastUpdate, PostTags, SerializedPost } from '../common';
 
 type BlogPostPreviewProps = {
   post: SerializedPost;
@@ -22,6 +22,7 @@ const BlogPostPreview = ({ post }: BlogPostPreviewProps) => {
       >
         {post.title}
       </CustomLink>
+      <LastUpdate lastUpdate={post.lastUpdate} />
       <PostTags tags={post.tags} />
       {/* <div dangerouslySetInnerHTML={{ __html: post.contentPreview }} /> */}
       <MDXRemote {...post.contentPreview} /*  components={components}  */ />

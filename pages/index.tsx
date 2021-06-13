@@ -57,6 +57,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
 
       return {
         title: data.title,
+        lastUpdate: data.lastUpdate,
         tags: data.tags,
         content,
         contentPreview,
