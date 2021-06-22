@@ -11,7 +11,6 @@ import {
   UnserializedPost,
 } from '../../modules/common';
 import React from 'react';
-import { HStack, Tag } from '@chakra-ui/react';
 
 const contentfulClient = contentful.createClient({
   // FIXME

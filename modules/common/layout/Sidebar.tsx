@@ -9,7 +9,14 @@ import {
 } from '@chakra-ui/react';
 import CustomLink from '../CustomLink';
 
-const Sidebar = () => {
+export type SidebarData = {
+  personName: string;
+  avatarUrl: string;
+  personBio: string;
+};
+export type SidebarProps = { sidebarData: SidebarData };
+
+const Sidebar = ({ sidebarData }: SidebarProps) => {
   const linkStyle: LinkProps = {
     color: 'white',
     fontWeight: 'bold',
@@ -28,21 +35,17 @@ const Sidebar = () => {
       // boxShadow="10px 0 5px -2px red"
       zIndex={1}
     >
-      <Flex direction="column" /* alignItems="center" */>
+      <Flex direction="column">
         <Avatar
-          name="Zen Ventzi"
+          name={sidebarData.personName}
           alignSelf="center"
           size="2xl"
-          src="https://bit.ly/sage-adebayo"
+          src={sidebarData.avatarUrl}
         />
         <Text alignSelf="center" fontSize="3xl" fontWeight="bold">
-          Zen Ventzi
+          {sidebarData.personName}
         </Text>
-        <Text>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s
-        </Text>
+        <Text>{sidebarData.personBio}</Text>
         <Box h="10" />
         <VStack alignSelf="flex-start">
           <CustomLink otherProps={linkStyle} href="/about">
