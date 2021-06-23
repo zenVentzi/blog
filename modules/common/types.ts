@@ -17,3 +17,13 @@ export type UnserializedPost = {
   content: string;
   slug: string;
 };
+
+export type UnserializedAbout = {
+  title: string;
+  content: string;
+};
+
+export type SerializedAbout = {
+  title: string;
+  content: MDXRemoteSerializeResult;
+};
