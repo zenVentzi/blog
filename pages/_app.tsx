@@ -12,8 +12,8 @@ import {
 import { SidebarData } from '../modules/common/layout/Sidebar';
 import React from 'react';
 
-type AppData = { appData: { sidebarData: SidebarData } };
-type CustomAppProps = AppData & AppProps;
+type AppCustomProps = { appData: { sidebarData: SidebarData } };
+type CustomAppProps = AppCustomProps & AppProps;
 
 const MyApp = ({ Component, pageProps, appData }: CustomAppProps) => {
   return (
@@ -29,11 +29,19 @@ const MyApp = ({ Component, pageProps, appData }: CustomAppProps) => {
   );
 };
 
-MyApp.getInitialProps = async (): Promise<AppData> => {
-  // const isInBroswer = typeof window !== undefined;
-  // if (isInBroswer) {
-  //   return;
-  // }
+MyApp.getInitialProps = async (): Promise<AppCustomProps> => {
+  const isInBroswer = typeof window !== 'undefined';
+  if (isInBroswer) {
+    const appCustomPropsString =
+      document.getElementById('__NEXT_DATA__')?.innerHTML;
+
+    if (!appCustomPropsString) {
+      throw new Error(`__NEXT_DATA__ scriptw as not found`);
+    }
+
+    const appCustomProps = JSON.parse(appCustomPropsString).props;
+    return appCustomProps;
+  }
 
   const contentfulClient = contentful.createClient({
     // FIXME
@@ -61,8 +69,6 @@ MyApp.getInitialProps = async (): Promise<AppData> => {
   });
 
   const sidebarData = { personName, personBio, avatarUrl };
-
-  console.log(sidebarData);
 
   return {
     appData: { sidebarData },
