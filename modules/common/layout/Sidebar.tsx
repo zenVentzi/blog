@@ -8,6 +8,7 @@ import {
   LinkProps,
 } from '@chakra-ui/react';
 import CustomLink from '../CustomLink';
+import SoundButton from './SoundButton';
 
 export type SidebarData = {
   personName: string;
@@ -54,6 +55,7 @@ const Sidebar = ({ sidebarData }: SidebarProps) => {
           <CustomLink otherProps={linkStyle} href="/">
             Home
           </CustomLink>
+          {/* <SoundButton /> */}
         </VStack>
       </Flex>
     </Box>

@@ -1,4 +1,6 @@
 import { Grid, GridItem } from '@chakra-ui/react';
+import React from 'react';
+import { BackgroundMusic } from '..';
 import Sidebar, { SidebarData } from './Sidebar';
 
 type LayoutProps = {

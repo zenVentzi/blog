@@ -4,8 +4,13 @@ import * as contentful from 'contentful';
 import { ChakraProvider } from '@chakra-ui/react';
 import { MDXProvider } from '@mdx-js/react';
 import { Layout } from '../modules/common/layout';
-import { MDXComponents, theme } from '../modules/common';
+import {
+  BackgroundMusicContext,
+  MDXComponents,
+  theme,
+} from '../modules/common';
 import { SidebarData } from '../modules/common/layout/Sidebar';
+import React from 'react';
 
 type AppData = { appData: { sidebarData: SidebarData } };
 type CustomAppProps = AppData & AppProps;
@@ -14,9 +19,11 @@ const MyApp = ({ Component, pageProps, appData }: CustomAppProps) => {
   return (
     <ChakraProvider theme={theme}>
       <MDXProvider components={MDXComponents}>
-        <Layout sidebarData={appData.sidebarData}>
-          <Component {...pageProps} />
-        </Layout>
+        <BackgroundMusicContext>
+          <Layout sidebarData={appData.sidebarData}>
+            <Component {...pageProps} />
+          </Layout>
+        </BackgroundMusicContext>
       </MDXProvider>
     </ChakraProvider>
   );
