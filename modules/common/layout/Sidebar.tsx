@@ -6,7 +6,9 @@ import {
   Button,
   VStack,
   LinkProps,
+  Badge,
 } from '@chakra-ui/react';
+import React from 'react';
 import CustomLink from '../CustomLink';
 import SoundButton from './SoundButton';
 
@@ -48,9 +50,18 @@ const Sidebar = ({ sidebarData }: SidebarProps) => {
         </Text>
         <Text>{sidebarData.personBio}</Text>
         <Box h="10" />
-        <VStack alignSelf="flex-start">
+        <VStack alignSelf="flex-start" alignItems="flex-start">
           <CustomLink otherProps={linkStyle} href="/about">
             About
+            <sup>
+              <Badge colorScheme="purple">Personal</Badge>
+            </sup>
+          </CustomLink>
+          <CustomLink otherProps={linkStyle} href="/about">
+            About
+            <sup>
+              <Badge colorScheme="purple">Pro</Badge>
+            </sup>
           </CustomLink>
           <CustomLink otherProps={linkStyle} href="/">
             Home
