@@ -12,7 +12,7 @@ const BackgroundMusic = ({ isMuted }: BackgrkoundMusicProps) => {
   const isMutedBinary = isMuted ? 1 : 0;
   const [player, setPlayer] = useState<any>();
 
-  const onReady = (event) => {
+  const onReady = (event: any) => {
     setPlayer(event.target);
   };
 
