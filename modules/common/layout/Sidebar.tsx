@@ -51,13 +51,13 @@ const Sidebar = ({ sidebarData }: SidebarProps) => {
         <Text>{sidebarData.personBio}</Text>
         <Box h="10" />
         <VStack alignSelf="flex-start" alignItems="flex-start">
-          <CustomLink otherProps={linkStyle} href="/about">
+          <CustomLink otherProps={linkStyle} href="/about-personal">
             About
             <sup>
               <Badge colorScheme="purple">Personal</Badge>
             </sup>
           </CustomLink>
-          <CustomLink otherProps={linkStyle} href="/about">
+          <CustomLink otherProps={linkStyle} href="/about-pro">
             About
             <sup>
               <Badge colorScheme="purple">Pro</Badge>
