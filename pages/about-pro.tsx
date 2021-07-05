@@ -1,10 +1,7 @@
 import { GetStaticProps } from 'next';
 import React from 'react';
-import {
-  /*  AboutPage, */ AboutPageProps,
-  getAboutPageData,
-} from '../modules/about';
-import AboutPage from '../modules/about/AboutPage';
+import AboutPage, { AboutPageProps } from '../modules/about/AboutPage';
+import { getAboutPageData } from '../modules/about/getAboutPageData';
 
 const AboutPro = (props: AboutPageProps) => {
   return <AboutPage {...props} />;
