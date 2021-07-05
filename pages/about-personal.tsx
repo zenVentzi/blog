@@ -1,16 +1,10 @@
 import { GetStaticProps } from 'next';
 import React from 'react';
 // import * as contentful from 'contentful';
-import {
-  // AboutPage,
-  AboutPageProps,
-  getAboutPageData,
-  // createGetStaticProps,
-} from '../modules/about';
-import { SerializedAbout, UnserializedAbout } from '../modules/common';
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
-import AboutPage from '../modules/about/AboutPage';
+import AboutPage, { AboutPageProps } from '../modules/about/AboutPage';
+import { getAboutPageData } from '../modules/about/getAboutPageData';
 
 const AboutPersonal = (props: AboutPageProps) => {
   // return <div>About personal</div>;

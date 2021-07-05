@@ -1,7 +1,7 @@
 import * as contentful from 'contentful';
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
-import { SerializedAbout, UnserializedAbout } from '../common';
+import { SerializedAbout, UnserializedAbout } from '../common/types';
 import { AboutPageProps } from './AboutPage';
 
 export const getAboutPageData = async (

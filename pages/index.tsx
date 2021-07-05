@@ -4,8 +4,8 @@ import * as contentful from 'contentful';
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
 import React from 'react';
-import { SerializedPost, UnserializedPost } from '../modules/common';
 import BlogPostPreview from '../modules/index/BlogPostPreview';
+import { SerializedPost, UnserializedPost } from '../modules/common/types';
 
 const contentfulClient = contentful.createClient({
   // FIXME

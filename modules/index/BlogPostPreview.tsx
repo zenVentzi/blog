@@ -1,6 +1,10 @@
 import { Box, Heading, Text } from '@chakra-ui/layout';
 import { MDXRemote } from 'next-mdx-remote';
-import { CustomLink, LastUpdate, PostTags, SerializedPost } from '../common';
+import React from 'react';
+import CustomLink from '../common/CustomLink';
+import LastUpdate from '../common/LastUpdate';
+import PostTags from '../common/PostTags';
+import { SerializedPost } from '../common/types';
 
 type BlogPostPreviewProps = {
   post: SerializedPost;

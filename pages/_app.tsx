@@ -3,14 +3,12 @@ import * as gravatar from 'gravatar';
 import * as contentful from 'contentful';
 import { ChakraProvider } from '@chakra-ui/react';
 import { MDXProvider } from '@mdx-js/react';
-import { Layout } from '../modules/common/layout';
-import {
-  BackgroundMusicContext,
-  MDXComponents,
-  theme,
-} from '../modules/common';
 import { SidebarData } from '../modules/common/layout/Sidebar';
 import React from 'react';
+import theme from '../modules/common/theme';
+import MDXComponents from '../modules/common/MDXComponents';
+import BackgroundMusicContext from '../modules/common/BackgroundMusicContext';
+import Layout from '../modules/common/layout/Layout';
 
 type AppCustomProps = { appData: { sidebarData: SidebarData } };
 type CustomAppProps = AppCustomProps & AppProps;

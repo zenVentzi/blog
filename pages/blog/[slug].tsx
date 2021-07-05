@@ -4,13 +4,10 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import matter from 'gray-matter';
-import {
-  LastUpdate,
-  PostTags,
-  SerializedPost,
-  UnserializedPost,
-} from '../../modules/common';
 import React from 'react';
+import { SerializedPost, UnserializedPost } from '../../modules/common/types';
+import LastUpdate from '../../modules/common/LastUpdate';
+import PostTags from '../../modules/common/PostTags';
 
 const contentfulClient = contentful.createClient({
   // FIXME

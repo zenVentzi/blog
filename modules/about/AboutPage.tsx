@@ -1,7 +1,7 @@
 import { Box, Center, Heading } from '@chakra-ui/react';
 import { MDXRemote } from 'next-mdx-remote';
+import { SerializedAbout } from '../common/types';
 // import React from 'react';
-import { SerializedAbout } from '../common';
 
 export type AboutPageProps = {
   aboutData: SerializedAbout;
