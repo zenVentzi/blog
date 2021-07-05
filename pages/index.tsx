@@ -1,10 +1,11 @@
 import { Box, Flex, Divider, VStack, Center } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 import * as contentful from 'contentful';
-import { SerializedPost, UnserializedPost } from '../modules/common';
-import { BlogPostPreivew } from '../modules/index';
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
+import React from 'react';
+import { SerializedPost, UnserializedPost } from '../modules/common';
+import BlogPostPreview from '../modules/index/BlogPostPreview';
 
 const contentfulClient = contentful.createClient({
   // FIXME
@@ -29,7 +30,7 @@ const Index = ({ posts }: IndexProps) => {
         }
       >
         {posts.map((post) => {
-          return <BlogPostPreivew key={post.slug} post={post} />;
+          return <BlogPostPreview key={post.slug} post={post} />;
         })}
       </VStack>
     </div>
