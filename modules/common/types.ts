@@ -1,5 +1,10 @@
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
+export type PostMeta = {
+  title: string;
+  description: string;
+};
+
 export type SerializedPost = {
   title: string;
   lastUpdate: string;
@@ -7,6 +12,7 @@ export type SerializedPost = {
   contentPreview: MDXRemoteSerializeResult;
   content: MDXRemoteSerializeResult;
   slug: string;
+  meta: PostMeta;
 };
 
 export type UnserializedPost = {
@@ -16,6 +22,7 @@ export type UnserializedPost = {
   contentPreview: string;
   content: string;
   slug: string;
+  meta: PostMeta;
 };
 
 export type AboutMeta = {

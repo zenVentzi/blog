@@ -1,5 +1,6 @@
 import { Box, Center, Heading } from '@chakra-ui/layout';
 import * as contentful from 'contentful';
+import { NextSeo } from 'next-seo';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -23,6 +24,7 @@ const PostPage = ({ post }: PostProps) => {
   // console.log(post.content);
   return (
     <Box p="30px" h="100%">
+      <NextSeo title={post.meta.title} description={post.meta.description} />
       <Center>
         <Box w="80ch">
           <Heading as="h1" size="2xl" mb="15px">
@@ -81,6 +83,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
         content,
         contentPreview,
         slug: data.slug,
+        meta: data.meta,
       };
     }
   )[0];
