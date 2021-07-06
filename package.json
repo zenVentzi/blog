@@ -21,6 +21,7 @@
     "gray-matter": "^4.0.3",
     "next": "latest",
     "next-mdx-remote": "^3.0.2",
+    "next-seo": "^4.26.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^4.2.0",

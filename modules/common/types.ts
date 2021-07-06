@@ -18,12 +18,19 @@ export type UnserializedPost = {
   slug: string;
 };
 
+export type AboutMeta = {
+  title: string;
+  description: string;
+};
+
 export type UnserializedAbout = {
   title: string;
   content: string;
+  meta: AboutMeta;
 };
 
 export type SerializedAbout = {
   title: string;
   content: MDXRemoteSerializeResult;
+  meta: AboutMeta;
 };

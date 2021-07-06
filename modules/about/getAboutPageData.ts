@@ -30,6 +30,7 @@ export const getAboutPageData = async (
       return {
         title: data.title,
         content,
+        meta: data.meta,
       };
     })[0];
 
