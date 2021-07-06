@@ -1,11 +1,13 @@
 import { Box, Flex, Divider, VStack, Center } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
+import { NextSeo } from 'next-seo';
 import * as contentful from 'contentful';
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
 import React from 'react';
 import BlogPostPreview from '../modules/index/BlogPostPreview';
 import { SerializedPost, UnserializedPost } from '../modules/common/types';
+import { IndexMeta } from '../modules/index/types';
 
 const contentfulClient = contentful.createClient({
   // FIXME
@@ -15,11 +17,13 @@ const contentfulClient = contentful.createClient({
 
 type IndexProps = {
   posts: SerializedPost[];
+  meta: IndexMeta;
 };
 
-const Index = ({ posts }: IndexProps) => {
+const Index = ({ posts, meta }: IndexProps) => {
   return (
     <div>
+      <NextSeo title={meta.title} description={meta.description} />
       <VStack
         spacing="20px"
         pt="30px"
@@ -80,7 +84,14 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
     })
   );
 
+  const metaEntry = await contentfulClient.getEntries<IndexMeta>({
+    content_type: 'homePageMeta',
+  });
+  const homeMeta: IndexMeta = metaEntry.items.map((item) => {
+    return { title: item.fields.title, description: item.fields.description };
+  })[0];
+
   return {
-    props: { posts: serializedPosts },
+    props: { posts: serializedPosts, meta: homeMeta },
   };
 };
