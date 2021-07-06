@@ -67,6 +67,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
         content,
         contentPreview,
         slug: data.slug,
+        meta: data.meta,
       };
     });
 
