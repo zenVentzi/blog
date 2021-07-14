@@ -16,10 +16,10 @@ const Layout = ({ children, sidebarData }: LayoutProps) => {
       templateColumns={{ base: '1fr', lg: '25% 75%' }}
     >
       {/* <Grid h="100vh" templateRows="1fr" templateColumns="20% 80%"> */}
-      <GridItem rowSpan={1} colSpan={1}>
+      <GridItem /* rowSpan={1} colSpan={1} */>
         <Sidebar sidebarData={sidebarData} />
       </GridItem>
-      <GridItem colSpan={1} overflowY={{ lg: 'scroll' }}>
+      <GridItem /* colSpan={1}  */ overflowY={{ lg: 'scroll' }}>
         {children}
       </GridItem>
     </Grid>
