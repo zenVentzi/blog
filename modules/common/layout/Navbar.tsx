@@ -26,7 +26,7 @@ const Navbar = ({ navbarData }: NavbarProps) => {
   const linkStyle: LinkProps = {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 'xl',
+    fontSize: { base: 'sm', md: 'xl' /* lg: 'xl' */ },
   };
 
   // const dividerOrientation = useBreakpointValue<'horizontal' | 'vertical'>({
@@ -75,7 +75,7 @@ const Navbar = ({ navbarData }: NavbarProps) => {
         <Stack
           alignSelf="flex-start"
           direction={{ base: 'row', lg: 'column' }}
-          spacing={{ base: '2em', lg: '0.3em' }}
+          spacing={{ base: '1em', sm: '2em', lg: '0.3em' /* lg is vertical */ }}
           alignItems="flex-start"
         >
           <CustomLink otherProps={linkStyle} href="/">
@@ -84,13 +84,23 @@ const Navbar = ({ navbarData }: NavbarProps) => {
           <CustomLink otherProps={linkStyle} href="/about-pro">
             About
             <sup>
-              <Badge colorScheme="purple">Pro</Badge>
+              <Badge
+                colorScheme="purple"
+                fontSize={{ base: '0.7em', md: '1em' }}
+              >
+                Pro
+              </Badge>
             </sup>
           </CustomLink>
           <CustomLink otherProps={linkStyle} href="/about-personal">
             About
             <sup>
-              <Badge colorScheme="purple">Personal</Badge>
+              <Badge
+                colorScheme="purple"
+                fontSize={{ base: '0.7em', md: '1em' }}
+              >
+                Personal
+              </Badge>
             </sup>
           </CustomLink>
           {/* <SoundButton /> */}
