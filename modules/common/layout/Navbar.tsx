@@ -56,7 +56,11 @@ const Navbar = ({ navbarData }: NavbarProps) => {
         >
           {navbarData.personName}
         </Text>
-        <Text display={{ base: 'none', lg: 'initial' }}>
+        <Text
+          display={{ base: 'none', lg: 'initial' }}
+          alignSelf="center"
+          textAlign="center"
+        >
           {navbarData.personBio}
         </Text>
         <Box h={{ base: '0', lg: '20' }} />
