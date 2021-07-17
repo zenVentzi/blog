@@ -1,13 +1,13 @@
 import { Box, Grid, GridItem } from '@chakra-ui/react';
 import React from 'react';
-import Sidebar, { SidebarData } from './Sidebar';
+import Navbar, { NavbarData } from './Navbar';
 
 type LayoutProps = {
-  sidebarData: SidebarData;
+  navbarData: NavbarData;
   children: React.ReactNode;
 };
 
-const Layout = ({ children, sidebarData }: LayoutProps) => {
+const Layout = ({ children, navbarData }: LayoutProps) => {
   // if wider than x then have sidebar
   return (
     <Grid
@@ -17,7 +17,7 @@ const Layout = ({ children, sidebarData }: LayoutProps) => {
     >
       {/* <Grid h="100vh" templateRows="1fr" templateColumns="20% 80%"> */}
       <GridItem /* rowSpan={1} colSpan={1} */>
-        <Sidebar sidebarData={sidebarData} />
+        <Navbar navbarData={navbarData} />
       </GridItem>
       <GridItem /* colSpan={1}  */ overflowY={{ lg: 'scroll' }}>
         {children}

@@ -3,14 +3,14 @@ import * as gravatar from 'gravatar';
 import * as contentful from 'contentful';
 import { ChakraProvider } from '@chakra-ui/react';
 import { MDXProvider } from '@mdx-js/react';
-import { SidebarData } from '../modules/common/layout/Sidebar';
+import { NavbarData } from '../modules/common/layout/Navbar';
 import React from 'react';
 import theme from '../modules/common/theme';
 import MDXComponents from '../modules/common/MDXComponents';
 import BackgroundMusicContext from '../modules/common/BackgroundMusicContext';
 import Layout from '../modules/common/layout/Layout';
 
-type AppCustomProps = { appData: { sidebarData: SidebarData } };
+type AppCustomProps = { appData: { navbarData: NavbarData } };
 type CustomAppProps = AppCustomProps & AppProps;
 
 const MyApp = ({ Component, pageProps, appData }: CustomAppProps) => {
@@ -18,7 +18,7 @@ const MyApp = ({ Component, pageProps, appData }: CustomAppProps) => {
     <ChakraProvider theme={theme}>
       <MDXProvider components={MDXComponents}>
         <BackgroundMusicContext>
-          <Layout sidebarData={appData.sidebarData}>
+          <Layout navbarData={appData.navbarData}>
             <Component {...pageProps} />
           </Layout>
         </BackgroundMusicContext>
@@ -47,12 +47,12 @@ MyApp.getInitialProps = async (): Promise<AppCustomProps> => {
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN as string,
   });
 
-  type SidebarDataRaw = Omit<SidebarData, 'avatarUrl'> & {
+  type NavbarDataRaw = Omit<NavbarData, 'avatarUrl'> & {
     gravatarEmail: string;
   };
 
-  const entry = await contentfulClient.getEntries<SidebarDataRaw>({
-    content_type: 'sidebarData',
+  const entry = await contentfulClient.getEntries<NavbarDataRaw>({
+    content_type: 'navbarData',
   });
 
   // console.log('entry');
@@ -69,7 +69,7 @@ MyApp.getInitialProps = async (): Promise<AppCustomProps> => {
   const sidebarData = { personName, personBio, avatarUrl };
 
   return {
-    appData: { sidebarData },
+    appData: { navbarData: sidebarData },
   };
 };
 

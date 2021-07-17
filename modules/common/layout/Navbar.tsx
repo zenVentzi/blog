@@ -13,14 +13,14 @@ import React from 'react';
 import CustomLink from '../CustomLink';
 import SoundButton from './SoundButton';
 
-export type SidebarData = {
+export type NavbarData = {
   personName: string;
   avatarUrl: string;
   personBio: string;
 };
-export type SidebarProps = { sidebarData: SidebarData };
+export type NavbarProps = { navbarData: NavbarData };
 
-const Sidebar = ({ sidebarData }: SidebarProps) => {
+const Navbar = ({ navbarData }: NavbarProps) => {
   const linkStyle: LinkProps = {
     color: 'white',
     fontWeight: 'bold',
@@ -42,11 +42,11 @@ const Sidebar = ({ sidebarData }: SidebarProps) => {
       <Flex direction="column">
         {/* <Flex direction={{ base: 'row', lg: 'column' }}> */}
         <Avatar
-          name={sidebarData.personName}
+          name={navbarData.personName}
           alignSelf="center"
           size="2xl"
           display={{ base: 'none', lg: 'initial' }}
-          src={sidebarData.avatarUrl}
+          src={navbarData.avatarUrl}
         />
         <Text
           alignSelf="center"
@@ -54,10 +54,10 @@ const Sidebar = ({ sidebarData }: SidebarProps) => {
           display={{ base: 'none', lg: 'initial' }}
           fontWeight="bold"
         >
-          {sidebarData.personName}
+          {navbarData.personName}
         </Text>
         <Text display={{ base: 'none', lg: 'initial' }}>
-          {sidebarData.personBio}
+          {navbarData.personBio}
         </Text>
         <Box h={{ base: '0', lg: '20' }} />
         <Stack
@@ -88,4 +88,4 @@ const Sidebar = ({ sidebarData }: SidebarProps) => {
   );
 };
 
-export default Sidebar;
+export default Navbar;
