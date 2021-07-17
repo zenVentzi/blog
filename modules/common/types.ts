@@ -33,11 +33,13 @@ export type AboutMeta = {
 export type UnserializedAbout = {
   title: string;
   content: string;
+  gravatarEmail: string;
   meta: AboutMeta;
 };
 
 export type SerializedAbout = {
   title: string;
   content: MDXRemoteSerializeResult;
+  avatarUrl: string;
   meta: AboutMeta;
 };

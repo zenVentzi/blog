@@ -9,6 +9,7 @@ import theme from '../modules/common/theme';
 import MDXComponents from '../modules/common/MDXComponents';
 import BackgroundMusicContext from '../modules/common/BackgroundMusicContext';
 import Layout from '../modules/common/layout/Layout';
+import getAvatarUrl from '../modules/common/getAvatarUrl';
 
 type AppCustomProps = { appData: { navbarData: NavbarData } };
 type CustomAppProps = AppCustomProps & AppProps;
@@ -60,11 +61,7 @@ MyApp.getInitialProps = async (): Promise<AppCustomProps> => {
 
   const { personName, personBio, gravatarEmail } = entry.items[0].fields;
 
-  const avatarUrl = gravatar.url(gravatarEmail, {
-    s: '200',
-    r: 'pg',
-    d: '404',
-  });
+  const avatarUrl = getAvatarUrl(gravatarEmail);
 
   const sidebarData = { personName, personBio, avatarUrl };
 

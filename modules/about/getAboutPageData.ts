@@ -1,6 +1,7 @@
 import * as contentful from 'contentful';
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
+import getAvatarUrl from '../common/getAvatarUrl';
 import { SerializedAbout, UnserializedAbout } from '../common/types';
 import { AboutPageProps } from './AboutPage';
 
@@ -29,6 +30,7 @@ export const getAboutPageData = async (
 
       return {
         title: data.title,
+        gravatarEmail: data.gravatarEmail,
         content,
         meta: data.meta,
       };
@@ -41,6 +43,7 @@ export const getAboutPageData = async (
 
   const serializedAbout: SerializedAbout = {
     ...unserializedAbout,
+    avatarUrl: getAvatarUrl(unserializedAbout.gravatarEmail),
     content: serializedContent,
   };
 

@@ -1,6 +1,7 @@
-import { Box, Center, Heading } from '@chakra-ui/react';
+import { Avatar, Box, Center, Heading } from '@chakra-ui/react';
 import { MDXRemote } from 'next-mdx-remote';
 import { NextSeo } from 'next-seo';
+import React from 'react';
 import { SerializedAbout } from '../common/types';
 // import React from 'react';
 
@@ -8,7 +9,9 @@ export type AboutPageProps = {
   aboutData: SerializedAbout;
 };
 
-const AboutPage = ({ aboutData: { content, title, meta } }: AboutPageProps) => {
+const AboutPage = ({
+  aboutData: { content, title, avatarUrl, meta },
+}: AboutPageProps) => {
   // return <div>About pee</div>;
   return (
     <Box p="30px" h="100%">
@@ -18,6 +21,16 @@ const AboutPage = ({ aboutData: { content, title, meta } }: AboutPageProps) => {
           <Heading as="h1" size="2xl" mb="15px">
             {title}
           </Heading>
+          <Center>
+            <Avatar
+              name={'Zen Ventzi'}
+              iconLabel="Bas"
+              // alignSelf="center"
+              size="2xl"
+              display={{ base: 'inline-block', lg: 'none' }}
+              src={avatarUrl}
+            />
+          </Center>
           <MDXRemote
             {...content}
             components={
