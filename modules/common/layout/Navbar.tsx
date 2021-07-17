@@ -8,6 +8,8 @@ import {
   LinkProps,
   Badge,
   Stack,
+  Divider,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import React from 'react';
 import CustomLink from '../CustomLink';
@@ -27,13 +29,19 @@ const Navbar = ({ navbarData }: NavbarProps) => {
     fontSize: 'xl',
   };
 
+  // const dividerOrientation = useBreakpointValue<'horizontal' | 'vertical'>({
+  //   base: 'horizontal',
+  //   lg: 'vertical',
+  // });
+
   return (
     <Box
       h="100%"
       w="100%"
-      p={{ base: '1em', lg: '2em' }}
+      p={{ base: '0.5em', lg: '2em' }}
       // bg="black"
       borderRight={{ base: '0px', lg: '2px' }}
+      // borderBottom={{ base: '1px', lg: '0px' }}
       // borderColor="white"
       // shadow doesn't currently work because of grid
       // boxShadow="10px 0 5px -2px red"
@@ -88,6 +96,7 @@ const Navbar = ({ navbarData }: NavbarProps) => {
           {/* <SoundButton /> */}
         </Stack>
       </Flex>
+      <Divider orientation={'horizontal'} display={{ lg: 'none' }} />
     </Box>
   );
 };
