@@ -7,6 +7,7 @@ import {
   VStack,
   LinkProps,
   Badge,
+  Stack,
 } from '@chakra-ui/react';
 import React from 'react';
 import CustomLink from '../CustomLink';
@@ -30,32 +31,43 @@ const Sidebar = ({ sidebarData }: SidebarProps) => {
     <Box
       h="100%"
       w="100%"
-      p="10"
+      p={{ base: '1em', lg: '2em' }}
       // bg="black"
-      borderRight="2px"
+      borderRight={{ base: '0px', lg: '2px' }}
       // borderColor="white"
       // shadow doesn't currently work because of grid
       // boxShadow="10px 0 5px -2px red"
       zIndex={1}
     >
       <Flex direction="column">
+        {/* <Flex direction={{ base: 'row', lg: 'column' }}> */}
         <Avatar
           name={sidebarData.personName}
           alignSelf="center"
           size="2xl"
+          display={{ base: 'none', lg: 'initial' }}
           src={sidebarData.avatarUrl}
         />
-        <Text alignSelf="center" fontSize="3xl" fontWeight="bold">
+        <Text
+          alignSelf="center"
+          fontSize="3xl"
+          display={{ base: 'none', lg: 'initial' }}
+          fontWeight="bold"
+        >
           {sidebarData.personName}
         </Text>
-        <Text>{sidebarData.personBio}</Text>
-        <Box h="10" />
-        <VStack alignSelf="flex-start" alignItems="flex-start">
-          <CustomLink otherProps={linkStyle} href="/about-personal">
-            About
-            <sup>
-              <Badge colorScheme="purple">Personal</Badge>
-            </sup>
+        <Text display={{ base: 'none', lg: 'initial' }}>
+          {sidebarData.personBio}
+        </Text>
+        <Box h={{ base: '0', lg: '20' }} />
+        <Stack
+          alignSelf="flex-start"
+          direction={{ base: 'row', lg: 'column' }}
+          spacing={{ base: '2em', lg: '0.3em' }}
+          alignItems="flex-start"
+        >
+          <CustomLink otherProps={linkStyle} href="/">
+            Home
           </CustomLink>
           <CustomLink otherProps={linkStyle} href="/about-pro">
             About
@@ -63,11 +75,14 @@ const Sidebar = ({ sidebarData }: SidebarProps) => {
               <Badge colorScheme="purple">Pro</Badge>
             </sup>
           </CustomLink>
-          <CustomLink otherProps={linkStyle} href="/">
-            Home
+          <CustomLink otherProps={linkStyle} href="/about-personal">
+            About
+            <sup>
+              <Badge colorScheme="purple">Personal</Badge>
+            </sup>
           </CustomLink>
           {/* <SoundButton /> */}
-        </VStack>
+        </Stack>
       </Flex>
     </Box>
   );
