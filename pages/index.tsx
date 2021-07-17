@@ -24,19 +24,29 @@ const Index = ({ posts, meta }: IndexProps) => {
   return (
     <div>
       <NextSeo title={meta.title} description={meta.description} />
-      <VStack
-        spacing="20px"
-        pt="30px"
-        divider={
-          // <Center>
-          <Divider width="40%" />
-          // </Center>
-        }
-      >
-        {posts.map((post) => {
-          return <BlogPostPreview key={post.slug} post={post} />;
-        })}
-      </VStack>
+      <Center>
+        <VStack
+          spacing="20px"
+          pt="30px"
+          // maxWidth={{ base: '50%' }}
+          // width="50%"
+          maxWidth={{ base: '95%', md: '85%', lg: '80%' }}
+          // style={{ background: 'green' }}
+          // justify="center"
+          align="flex-start"
+          divider={
+            // <Center>
+            <Divider width="40%" />
+            // </Center>
+          }
+        >
+          {posts.map((post) => {
+            return <BlogPostPreview key={post.slug} post={post} />;
+          })}
+          {/* <div>teeeeeest</div>
+        <div style={{ background: 'red' }}>teeeeeest</div> */}
+        </VStack>
+      </Center>
     </div>
   );
 };

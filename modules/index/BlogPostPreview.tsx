@@ -11,8 +11,10 @@ type BlogPostPreviewProps = {
 };
 
 const BlogPostPreview = ({ post }: BlogPostPreviewProps) => {
+  // return <div>phaha</div>;
   return (
-    <Box w="80ch">
+    <Box maxW={{ base: '100%', xl: '80ch' }}>
+      {/* <Box maxW="80ch"> */}
       {/* <Heading mb="15px" size="2xl">
         {post.title}
       </Heading> */}
@@ -28,10 +30,15 @@ const BlogPostPreview = ({ post }: BlogPostPreviewProps) => {
       </CustomLink>
       <LastUpdate lastUpdate={post.lastUpdate} />
       <PostTags tags={post.tags} />
-      {/* <div dangerouslySetInnerHTML={{ __html: post.contentPreview }} /> */}
-      <MDXRemote {...post.contentPreview} /*  components={components}  */ />
+      <MDXRemote {...post.contentPreview} />
     </Box>
   );
 };
+
+/* 
+
+      <MDXRemote {...post.contentPreview} />
+
+*/
 
 export default BlogPostPreview;
