@@ -26,7 +26,7 @@ const PostPage = ({ post }: PostProps) => {
     <Box p="30px" h="100%">
       <NextSeo title={post.meta.title} description={post.meta.description} />
       <Center>
-        <Box w="80ch">
+        <Box maxW={{ base: '95%', sm: '90%', lg: '80%', xl: '80ch' }}>
           <Heading as="h1" size="2xl" mb="15px">
             {post.title}
           </Heading>
