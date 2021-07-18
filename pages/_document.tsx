@@ -5,7 +5,7 @@ import theme from '../modules/common/theme';
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en">
+      <Html lang="en" translate="no">
         <Head />
         <body>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />
