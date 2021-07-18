@@ -91,9 +91,14 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
   const unserializedPosts: UnserializedPost[] | null | undefined =
     entry.items.map((item) => {
       const { content, data } = matter(item.fields.content);
-      const contentPreview =
-        content.substring(0, 200) +
-        `<a href="/blog/${data.slug}"> Read more </a>`;
+      const showReadMoreButton =
+        content.substring(0, 200).length < content.length;
+
+      let contentPreview = content.substring(0, 200);
+
+      if (showReadMoreButton) {
+        contentPreview += `<a href="/blog/${data.slug}"> Read more </a>`;
+      }
 
       if (!data) {
         throw Error(`data cannot be empty`);
