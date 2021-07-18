@@ -88,14 +88,18 @@ export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
     }
   )[0];
 
+  if (!unserializedPost) {
+    return { notFound: true };
+  }
+
   // if (!post) {
 
   // // TODO: if null, redirect or do something
   // }
 
-  const serializedContent = await serialize(unserializedPost!.content);
+  const serializedContent = await serialize(unserializedPost.content);
   const serializedContentPreview = await serialize(
-    unserializedPost!.contentPreview
+    unserializedPost.contentPreview
   );
 
   //#region dummy test mdx
@@ -138,6 +142,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false, // See the "fallback" section below
+    fallback: 'blocking', // See the "fallback" section below
   };
 };
