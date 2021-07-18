@@ -55,7 +55,6 @@ export default PostPage;
 
 export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
   // console.log(context.params);
-
   if (!context?.params?.slug) {
     throw Error(`Slug not available`);
   }
@@ -66,9 +65,14 @@ export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
   });
 
   // console.log('entry');
-  // console.dir(entry, { depth: null });
+  console.dir(entry, { depth: null });
+
+  if (!entry.items.length) {
+    return { notFound: true };
+  }
 
   // TODO: map just the first item
+  // console.log(entry);
   const unserializedPost: UnserializedPost | null | undefined = entry.items.map(
     (item) => {
       const { content, data } = matter(item.fields.content);
