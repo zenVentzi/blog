@@ -17,7 +17,7 @@ export const getStaticProps: GetStaticProps<AboutPageProps> = async (
     return { notFound: true };
   }
 
-  return { props: aboutPageData, revalidate: 0 };
+  return { props: aboutPageData, revalidate: 1 };
 };
 
 export default AboutPro;

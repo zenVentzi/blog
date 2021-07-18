@@ -121,7 +121,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
 
   return {
     props: { post: serializedPost }, // will be passed to the page component as props
-    revalidate: 0,
+    revalidate: 1,
   };
 };
 

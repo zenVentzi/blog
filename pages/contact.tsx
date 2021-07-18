@@ -67,7 +67,7 @@ export const getStaticProps: GetStaticProps<ContactProps> = async (context) => {
 
   // console.log(contactPageData);
 
-  return { props: { contactPageData }, revalidate: 0 };
+  return { props: { contactPageData }, revalidate: 1 };
 };
 
 export default Contact;
