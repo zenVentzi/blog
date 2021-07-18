@@ -103,6 +103,9 @@ const Navbar = ({ navbarData }: NavbarProps) => {
               </Badge>
             </sup>
           </CustomLink>
+          <CustomLink otherProps={linkStyle} href="/contact">
+            Contact
+          </CustomLink>
           {/* <SoundButton /> */}
         </Stack>
       </Flex>
