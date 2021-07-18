@@ -6,7 +6,9 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en" translate="no">
-        <Head />
+        <Head>
+          <meta name="google" content="notranslate" />
+        </Head>
         <body>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <Main />
