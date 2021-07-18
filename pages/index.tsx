@@ -1,4 +1,4 @@
-import { Box, Flex, Divider, VStack, Center } from '@chakra-ui/react';
+import { Box, Flex, Divider, VStack, Center, HStack } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import * as contentful from 'contentful';
@@ -35,9 +35,12 @@ const Index = ({ posts, meta }: IndexProps) => {
           // justify="center"
           align="flex-start"
           divider={
-            // <Center>
-            <Divider width="40%" />
-            // </Center>
+            <HStack w="100%" justify="center" visibility="hidden">
+              <Divider
+                width={{ base: '80%', sm: '70%', md: '50%' /* lg: '40%' */ }}
+                visibility="visible"
+              />
+            </HStack>
           }
         >
           {posts.map((post) => {

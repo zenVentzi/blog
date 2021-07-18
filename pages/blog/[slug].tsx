@@ -65,7 +65,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
   });
 
   // console.log('entry');
-  console.dir(entry, { depth: null });
+  // console.dir(entry, { depth: null });
 
   if (!entry.items.length) {
     return { notFound: true };
