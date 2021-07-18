@@ -71,6 +71,7 @@ const MDXComponents = {
   ol: (props) => <Box as="ol" pt={2} pl={4} ml={2} {...props} />,
   li: (props) => <Box as="li" pb={1} {...props} />,
   blockquote: Quote,
+  Link,
 };
 
 /* eslint-enable react/display-name */

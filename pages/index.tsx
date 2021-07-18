@@ -2,9 +2,10 @@ import { Box, Flex, Divider, VStack, Center, HStack } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import * as contentful from 'contentful';
+import { format, compareDesc } from 'date-fns';
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
-import React from 'react';
+import React, { useState } from 'react';
 import BlogPostPreview from '../modules/index/BlogPostPreview';
 import { SerializedPost, UnserializedPost } from '../modules/common/types';
 import { IndexMeta } from '../modules/index/types';
@@ -15,12 +16,33 @@ const contentfulClient = contentful.createClient({
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN as string,
 });
 
+type Posts = IndexProps['posts'];
+
+const sortPosts = (postA: SerializedPost, postB: SerializedPost) => {
+  const dateA = new Date(postA.lastUpdate);
+  const dateB = new Date(postB.lastUpdate);
+
+  // desc = latest(newest) first oldest last
+  return compareDesc(dateA, dateB);
+};
+
+const getOrderedPosts = (unOrderedPosts: Posts): Posts => {
+  const pinnedPost = unOrderedPosts.filter((p) => !!p.pinToTop)[0];
+  let orderedPosts = unOrderedPosts.sort(sortPosts);
+  orderedPosts = [pinnedPost, ...orderedPosts];
+  orderedPosts = [...new Set(orderedPosts)];
+
+  return orderedPosts;
+};
+
 type IndexProps = {
   posts: SerializedPost[];
   meta: IndexMeta;
 };
 
 const Index = ({ posts, meta }: IndexProps) => {
+  const [orderedPosts] = useState(getOrderedPosts(posts));
+
   return (
     <div>
       <NextSeo title={meta.title} description={meta.description} />
@@ -43,7 +65,7 @@ const Index = ({ posts, meta }: IndexProps) => {
             </HStack>
           }
         >
-          {posts.map((post) => {
+          {orderedPosts.map((post) => {
             return <BlogPostPreview key={post.slug} post={post} />;
           })}
           {/* <div>teeeeeest</div>
@@ -69,12 +91,19 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
   const unserializedPosts: UnserializedPost[] | null | undefined =
     entry.items.map((item) => {
       const { content, data } = matter(item.fields.content);
-      const contentPreview = content.substring(0, 200);
+      const contentPreview =
+        content.substring(0, 200) +
+        `<a href="/blog/${data.slug}" openInNewTab={true}> Read more </a>`;
+
+      if (!data) {
+        throw Error(`data cannot be empty`);
+      }
 
       // TODO: check data fields if empty
 
       return {
         title: data.title,
+        pinToTop: !!data.pinToTop,
         lastUpdate: data.lastUpdate,
         tags: data.tags,
         content,

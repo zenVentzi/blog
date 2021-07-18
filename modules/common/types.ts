@@ -8,6 +8,7 @@ export type PostMeta = {
 export type SerializedPost = {
   title: string;
   lastUpdate: string;
+  pinToTop?: boolean;
   tags: string[];
   contentPreview: MDXRemoteSerializeResult;
   content: MDXRemoteSerializeResult;
