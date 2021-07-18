@@ -93,7 +93,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
       const { content, data } = matter(item.fields.content);
       const contentPreview =
         content.substring(0, 200) +
-        `<a href="/blog/${data.slug}" openInNewTab={true}> Read more </a>`;
+        `<a href="/blog/${data.slug}"> Read more </a>`;
 
       if (!data) {
         throw Error(`data cannot be empty`);
