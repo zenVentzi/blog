@@ -104,6 +104,6 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
 
   return {
     props: { posts: serializedPosts, meta: homeMeta },
-    revalidate: 0,
+    revalidate: 1,
   };
 };
