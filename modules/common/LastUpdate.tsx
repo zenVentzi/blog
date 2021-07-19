@@ -4,7 +4,7 @@ type LastUpdateProps = { lastUpdate: string };
 
 const LastUpdate = ({ lastUpdate }: LastUpdateProps) => {
   return (
-    <Text fontWeight={'hairline'} mb="1">
+    <Text fontWeight={'hairline'} fontSize="sm" mt="-1em" mb="1">
       Last update: {lastUpdate}
     </Text>
   );

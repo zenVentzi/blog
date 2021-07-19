@@ -26,7 +26,9 @@ const BlogPostPreview = ({ post }: BlogPostPreviewProps) => {
           fontWeight: 'bold',
         }}
       >
-        {post.title}
+        <Heading as="h1" size="md" mb="15px">
+          {post.title}
+        </Heading>
       </CustomLink>
       <LastUpdate lastUpdate={post.lastUpdate} />
       <PostTags tags={post.tags} />
