@@ -22,7 +22,7 @@ const BlogPostPreview = ({ post }: BlogPostPreviewProps) => {
         href={`blog/${post.slug}`}
         otherProps={{
           color: 'white',
-          fontSize: '5xl',
+          fontSize: 'xl',
           fontWeight: 'bold',
         }}
       >
