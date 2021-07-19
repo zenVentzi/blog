@@ -9,6 +9,7 @@ import React from 'react';
 import { SerializedPost, UnserializedPost } from '../../modules/common/types';
 import LastUpdate from '../../modules/common/LastUpdate';
 import PostTags from '../../modules/common/PostTags';
+import { Divider } from '@chakra-ui/react';
 
 const contentfulClient = contentful.createClient({
   // FIXME
@@ -45,6 +46,7 @@ const PostPage = ({ post }: PostProps) => {
               }
             }
           />
+          <Box h={{ base: '1em', md: '2em', lg: '3em' }} />
         </Box>
       </Center>
     </Box>
