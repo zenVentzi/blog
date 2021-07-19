@@ -23,10 +23,10 @@ type PostProps = {
 const PostPage = ({ post }: PostProps) => {
   // console.log(post.content);
   return (
-    <Box p="30px" h="100%">
+    <Box p={{ base: '1em', md: '2em', lg: '4em' }} h="100%">
       <NextSeo title={post.meta.title} description={post.meta.description} />
       <Center>
-        <Box maxW={{ base: '95%', sm: '90%', lg: '80%', xl: '80ch' }}>
+        <Box maxW={{ base: '100%', sm: '95%', lg: '95%', xl: '80ch' }}>
           <Heading as="h1" size="xl" mb="15px">
             {post.title}
           </Heading>
