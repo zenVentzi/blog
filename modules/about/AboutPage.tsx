@@ -24,6 +24,7 @@ const AboutPage = ({
           <Center>
             <Avatar
               name={'Zen Ventzi'}
+              mt="0.5em"
               iconLabel="Bas"
               // alignSelf="center"
               size="2xl"
