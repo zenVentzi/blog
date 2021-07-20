@@ -50,6 +50,7 @@ const Index = ({ posts, meta }: IndexProps) => {
         <VStack
           spacing="20px"
           pt="30px"
+          pb={{ base: '1em', md: '2em' }}
           // maxWidth={{ base: '50%' }}
           // width="50%"
           maxWidth={{ base: '95%', md: '85%', lg: '80%' }}
@@ -78,6 +79,10 @@ const Index = ({ posts, meta }: IndexProps) => {
 
 export default Index;
 
+function isEmptyObject(obj) {
+  return Object.keys(obj).length === 0;
+}
+
 export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
   // console.log(context.params);
 
@@ -100,7 +105,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
         contentPreview += `<a href="/blog/${data.slug}"> Read more </a>`;
       }
 
-      if (!data) {
+      if (!data || isEmptyObject(data)) {
         throw Error(`data cannot be empty`);
       }
 
