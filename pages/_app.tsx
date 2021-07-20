@@ -1,3 +1,5 @@
+import '@fontsource/raleway/400.css';
+import '@fontsource/open-sans/700.css';
 import type { AppProps /*, AppContext */ } from 'next/app';
 import * as gravatar from 'gravatar';
 import * as contentful from 'contentful';

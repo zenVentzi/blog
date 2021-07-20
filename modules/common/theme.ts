@@ -8,6 +8,10 @@ const config: ThemeConfig = {
 // 2. Call `extendTheme` and pass your custom values
 const theme = extendTheme({
   config,
+  fonts: {
+    heading: 'Open Sans',
+    body: 'Raleway',
+  },
   styles: {
     // global: (props) => {
     //   return {

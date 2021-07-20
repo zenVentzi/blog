@@ -13,6 +13,8 @@
     "@contentful/rich-text-react-renderer": "14.1.1",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
+    "@fontsource/open-sans": "^4.5.0",
+    "@fontsource/raleway": "^4.5.0",
     "classnames": "2.2.6",
     "contentful": "^8.3.7",
     "date-fns": "2.14.0",
