@@ -18,7 +18,7 @@ const AboutPage = ({
       <NextSeo title={meta.title} description={meta.description} />
       <Center>
         <Box w="80ch">
-          <Heading as="h1" size="2xl" mb="15px">
+          <Heading as="h1" size="md" /* mb="15px" */>
             {title}
           </Heading>
           <Center>
