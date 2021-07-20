@@ -79,7 +79,7 @@ const Index = ({ posts, meta }: IndexProps) => {
 
 export default Index;
 
-function isEmptyObject(obj) {
+function isEmptyObject(obj: any) {
   return Object.keys(obj).length === 0;
 }
 
