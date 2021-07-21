@@ -1,12 +1,19 @@
+import { useRouter } from 'next/dist/client/router';
 import { useState } from 'react';
 
 const showWarningKey = 'showAboutBlogWarning';
 
 const useAboutBlogWarning = () => {
+  // https://stackoverflow.com/a/67759963/4132182
+  const { asPath } = useRouter();
   const [showWarning, setShowWarning] = useState(() => {
     const isClient = typeof window !== 'undefined';
 
     if (isClient) {
+      if (asPath === '/blog/about-digital-garden-blog') {
+        return false;
+      }
+
       const resString = localStorage.getItem(showWarningKey);
 
       if (resString !== null) {
