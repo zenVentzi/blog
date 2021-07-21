@@ -10,6 +10,8 @@ import { SerializedPost, UnserializedPost } from '../../modules/common/types';
 import LastUpdate from '../../modules/common/LastUpdate';
 import PostTags from '../../modules/common/PostTags';
 import { Divider } from '@chakra-ui/react';
+import useAboutBlogWarning from '../../modules/blog/slug/useAboutBlogWarning';
+import AboutBlogWarning from '../../modules/blog/slug/AboutBlogWarning';
 
 const contentfulClient = contentful.createClient({
   // FIXME
@@ -22,10 +24,18 @@ type PostProps = {
 };
 
 const PostPage = ({ post }: PostProps) => {
-  // console.log(post.content);
+  const { disableWarning, enableWarning, showAboutBlogWarning, closeWarning } =
+    useAboutBlogWarning();
+
   return (
     <Box p={{ base: '1em', md: '2em', lg: '4em' }} h="100%">
       <NextSeo title={post.meta.title} description={post.meta.description} />
+      <AboutBlogWarning
+        showWarning={showAboutBlogWarning}
+        onCheckUnderstand={disableWarning}
+        onUncheckUnderstand={enableWarning}
+        onClose={closeWarning}
+      />
       <Center>
         <Box maxW={{ base: '100%', sm: '95%', lg: '95%', xl: '80ch' }}>
           <Heading as="h1" size="xl" mb="15px">
