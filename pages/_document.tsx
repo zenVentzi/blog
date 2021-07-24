@@ -24,6 +24,12 @@ export default class MyDocument extends Document {
           `,
             }}
           />{' '}
+          <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="RSS for Zen Ventzi blog"
+            href="https://www.zenventzi.com/rss"
+          />
           <meta name="google" content="notranslate" />
         </Head>
         <body>
