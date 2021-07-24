@@ -19,7 +19,7 @@ const BlogPostPreview = ({ post }: BlogPostPreviewProps) => {
         {post.title}
       </Heading> */}
       <CustomLink
-        href={`blog/${post.slug}`}
+        href={`/blog/${post.slug}`}
         otherProps={{
           color: 'white',
           fontSize: 'xl',

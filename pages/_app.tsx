@@ -6,17 +6,33 @@ import * as contentful from 'contentful';
 import { ChakraProvider } from '@chakra-ui/react';
 import { MDXProvider } from '@mdx-js/react';
 import { NavbarData } from '../modules/common/layout/Navbar';
-import React from 'react';
+import React, { useEffect } from 'react';
 import theme from '../modules/common/theme';
+import * as gtag from '../modules/common/gtag';
 import MDXComponents from '../modules/common/MDXComponents';
 import BackgroundMusicContext from '../modules/common/BackgroundMusicContext';
 import Layout from '../modules/common/layout/Layout';
 import getAvatarUrl from '../modules/common/getAvatarUrl';
+import { useRouter } from 'next/dist/client/router';
 
 type AppCustomProps = { appData: { navbarData: NavbarData } };
 type CustomAppProps = AppCustomProps & AppProps;
 
 const MyApp = ({ Component, pageProps, appData }: CustomAppProps) => {
+  const router = useRouter();
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      gtag.pageview(url);
+      console.log(`router change ${url}`);
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
+
   return (
     <ChakraProvider theme={theme}>
       <MDXProvider components={MDXComponents}>
