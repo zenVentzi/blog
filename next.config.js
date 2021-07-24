@@ -2,13 +2,14 @@ module.exports = {
   webpack: (config, { isServer }) => {
     // Fixes npm packages that depend on `fs` module
     if (!isServer) {
-      config.node = {
-        ...config.node,
-        fs: 'empty',
-        // child_process: 'empty',
-        // net: 'empty',
-        // tls: 'empty',
-      };
+      // config.node = {
+      //   ...config.node,
+      //   fs: 'empty',
+      //   // child_process: 'empty',
+      //   // net: 'empty',
+      //   // tls: 'empty',
+      // };
+      config.resolve.fallback.fs = false;
     }
 
     return config;
