@@ -10,8 +10,10 @@ import {
   Stack,
   Divider,
   useBreakpointValue,
+  Icon,
 } from '@chakra-ui/react';
 import React from 'react';
+import { FaRssSquare } from 'react-icons/fa';
 import CustomLink from '../CustomLink';
 import SoundButton from './SoundButton';
 
@@ -110,6 +112,18 @@ const Navbar = ({ navbarData }: NavbarProps) => {
             </CustomLink>
             <CustomLink otherProps={linkStyle} href="/contact">
               Contact
+            </CustomLink>
+            <CustomLink otherProps={linkStyle} href="/rss">
+              Follow
+              <sup>
+                <Badge
+                  colorScheme="orange"
+                  ml="0.2em"
+                  fontSize={{ base: '0.7em', md: '1em' }}
+                >
+                  RSS <Icon as={FaRssSquare}></Icon>
+                </Badge>
+              </sup>
             </CustomLink>
             {/* <SoundButton /> */}
           </Stack>
