@@ -17,7 +17,7 @@ const getPosts = async (options?: GetPostsOptions) => {
 
   const entry = await contentfulClient.getEntries<UnserializedPost>({
     content_type: 'blogPost',
-    limit: options?.limit ?? null,
+    limit: options?.limit,
   });
 
   // console.log('entry');

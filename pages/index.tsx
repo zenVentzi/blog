@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import BlogPostPreview from '../modules/index/BlogPostPreview';
 import { SerializedPost, UnserializedPost } from '../modules/common/types';
 import { IndexMeta } from '../modules/index/types';
+import getPosts from '../modules/common/getPosts';
 
 const contentfulClient = contentful.createClient({
   // FIXME
@@ -79,63 +80,10 @@ const Index = ({ posts, meta }: IndexProps) => {
 
 export default Index;
 
-function isEmptyObject(obj: any) {
-  return Object.keys(obj).length === 0;
-}
-
 export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
   // console.log(context.params);
 
-  const entry = await contentfulClient.getEntries<UnserializedPost>({
-    content_type: 'blogPost',
-  });
-
-  // console.log('entry');
-  // console.dir(entry, { depth: null });
-
-  const unserializedPosts: UnserializedPost[] | null | undefined =
-    entry.items.map((item) => {
-      const { content, data } = matter(item.fields.content);
-      const showReadMoreButton =
-        content.substring(0, 200).length < content.length;
-
-      let contentPreview = content.substring(0, 200);
-
-      if (showReadMoreButton) {
-        contentPreview += `<a href="/blog/${data.slug}"> Read more </a>`;
-      }
-
-      if (!data || isEmptyObject(data)) {
-        throw Error(`data cannot be empty`);
-      }
-
-      // TODO: check data fields if empty
-
-      return {
-        title: data.title,
-        pinToTop: !!data.pinToTop,
-        lastUpdate: data.lastUpdate,
-        tags: data.tags,
-        content,
-        contentPreview,
-        slug: data.slug,
-        meta: data.meta,
-      };
-    });
-
-  const serializedPosts: SerializedPost[] = await Promise.all(
-    unserializedPosts.map(async (unPost) => {
-      const serializedContent = await serialize(unPost.content);
-      const serializedContentPreview = await serialize(unPost.contentPreview);
-      const serializedPost: SerializedPost = {
-        ...unPost,
-        content: serializedContent,
-        contentPreview: serializedContentPreview,
-      };
-
-      return serializedPost;
-    })
-  );
+  const posts = await getPosts();
 
   const metaEntry = await contentfulClient.getEntries<IndexMeta>({
     content_type: 'homePageMeta',
@@ -145,7 +93,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
   })[0];
 
   return {
-    props: { posts: serializedPosts, meta: homeMeta },
+    props: { posts, meta: homeMeta },
     revalidate: 1,
   };
 };
