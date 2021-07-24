@@ -113,7 +113,7 @@ const Navbar = ({ navbarData }: NavbarProps) => {
             <CustomLink otherProps={linkStyle} href="/contact">
               Contact
             </CustomLink>
-            <CustomLink otherProps={linkStyle} href="/rss">
+            <CustomLink openInNewTab={true} otherProps={linkStyle} href="/rss">
               Follow
               <sup>
                 <Badge
