@@ -34,6 +34,7 @@ export type AboutMeta = {
 export type UnserializedAbout = {
   title: string;
   content: string;
+  avatarUrl: string;
   gravatarEmail: string;
   meta: AboutMeta;
 };

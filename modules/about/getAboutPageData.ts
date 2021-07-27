@@ -30,6 +30,7 @@ export const getAboutPageData = async (
 
       return {
         title: data.title,
+        avatarUrl: data.avatarUrl,
         gravatarEmail: data.gravatarEmail,
         content,
         meta: data.meta,
@@ -39,13 +40,13 @@ export const getAboutPageData = async (
   if (!unserializedAbout) return null;
 
   const serializedContent = await serialize(unserializedAbout.content);
-  // const serializedContent = {} as any;
 
   const serializedAbout: SerializedAbout = {
     ...unserializedAbout,
-    avatarUrl: getAvatarUrl(unserializedAbout.gravatarEmail),
     content: serializedContent,
   };
+
+  console.log(serializedAbout);
 
   return {
     aboutData: serializedAbout, // will be passed to the page component as props
