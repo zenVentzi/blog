@@ -66,20 +66,18 @@ MyApp.getInitialProps = async (): Promise<AppCustomProps> => {
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN as string,
   });
 
-  type NavbarDataRaw = Omit<NavbarData, 'avatarUrl'> & {
-    gravatarEmail: string;
-  };
+  // type NavbarDataRaw = Omit<NavbarData, 'avatarUrl'> & {
+  //   gravatarEmail: string;
+  // };
 
-  const entry = await contentfulClient.getEntries<NavbarDataRaw>({
+  const entry = await contentfulClient.getEntries<NavbarData>({
     content_type: 'navbarData',
   });
 
   // console.log('entry');
   // console.dir(entry, { depth: null });
 
-  const { personName, personBio, gravatarEmail } = entry.items[0].fields;
-
-  const avatarUrl = getAvatarUrl(gravatarEmail);
+  const { personName, personBio, avatarUrl } = entry.items[0].fields;
 
   const sidebarData = { personName, personBio, avatarUrl };
 
