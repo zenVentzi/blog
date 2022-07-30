@@ -41,8 +41,9 @@ const Navbar = ({ navbarData }: NavbarProps) => {
       h="100%"
       w="100%"
       p={{ base: '0.5em', lg: '2em' }}
+      // overflowY="auto"
       // bg="black"
-      borderRight={{ base: '0px', lg: '2px' }}
+      borderRight={{ lg: '0px', xl: '2px' }}
       // borderBottom={{ base: '1px', lg: '0px' }}
       // borderColor="white"
       // shadow doesn't currently work because of grid

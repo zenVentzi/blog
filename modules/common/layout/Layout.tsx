@@ -16,7 +16,7 @@ const Layout = ({ children, navbarData }: LayoutProps) => {
       templateColumns={{ base: '1fr', lg: '25% 75%' }}
     >
       {/* <Grid h="100vh" templateRows="1fr" templateColumns="20% 80%"> */}
-      <GridItem /* rowSpan={1} colSpan={1} */>
+      <GridItem /* rowSpan={1} colSpan={1} */ overflowY="auto">
         <Navbar navbarData={navbarData} />
       </GridItem>
       <GridItem /* colSpan={1}  */ overflowY={{ base: 'auto', lg: 'auto' }}>
