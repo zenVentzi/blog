@@ -2,7 +2,7 @@ import { useColorMode, Link, LinkProps } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { ReactNode } from 'react';
 
-type CustomLinkProps = LinkProps;
+type CustomLinkProps = LinkProps & { href: string };
 // type CustomLinkProps = {
 //   href: string;
 //   openInNewTab?: boolean;
