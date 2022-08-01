@@ -53,7 +53,8 @@ function AboutBlogWarning({
           expectations. Go to{' '}
           <CustomLink
             href="/blog/about-digital-garden-blog"
-            otherProps={{ onClick: onClose }}
+            // otherProps={{ onClick: onClose }}
+            onClick={onClose}
           >
             about blog
           </CustomLink>

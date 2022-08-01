@@ -86,10 +86,10 @@ const Navbar = ({ navbarData }: NavbarProps) => {
             }}
             alignItems="flex-start"
           >
-            <CustomLink otherProps={linkStyle} href="/">
+            <CustomLink {...linkStyle} href="/">
               Home
             </CustomLink>
-            <CustomLink otherProps={linkStyle} href="/about-pro">
+            <CustomLink {...linkStyle} href="/about-pro">
               About
               <sup>
                 <Badge
@@ -100,7 +100,7 @@ const Navbar = ({ navbarData }: NavbarProps) => {
                 </Badge>
               </sup>
             </CustomLink>
-            <CustomLink otherProps={linkStyle} href="/about-personal">
+            <CustomLink {...linkStyle} href="/about-personal">
               About
               <sup>
                 <Badge
@@ -111,10 +111,10 @@ const Navbar = ({ navbarData }: NavbarProps) => {
                 </Badge>
               </sup>
             </CustomLink>
-            <CustomLink otherProps={linkStyle} href="/contact">
+            <CustomLink {...linkStyle} href="/contact">
               Contact
             </CustomLink>
-            <CustomLink openInNewTab={true} otherProps={linkStyle} href="/rss">
+            <CustomLink {...linkStyle} target="_blank" href="/rss">
               Follow
               <sup>
                 <Badge

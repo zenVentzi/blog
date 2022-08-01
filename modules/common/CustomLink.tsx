@@ -2,16 +2,17 @@ import { useColorMode, Link, LinkProps } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { ReactNode } from 'react';
 
-type CustomLinkProps = {
-  href: string;
-  openInNewTab?: boolean;
-  otherProps?: LinkProps;
-  children: ReactNode;
-};
+type CustomLinkProps = LinkProps;
+// type CustomLinkProps = {
+//   href: string;
+//   openInNewTab?: boolean;
+//   otherProps?: LinkProps;
+//   children: ReactNode;
+// };
 
 const CustomLink = (props: CustomLinkProps) => {
   const { colorMode } = useColorMode();
-  const restProps = props.otherProps ?? {};
+  // const restProps = props.otherProps ?? {};
 
   const color = {
     light: 'hsl(208, 99%, 44%)',
@@ -20,11 +21,12 @@ const CustomLink = (props: CustomLinkProps) => {
 
   const href = props.href;
   const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'));
-
-  if (isInternalLink && !props.openInNewTab) {
+  const openInNewTab = props.target == '_blank';
+  if (isInternalLink && !openInNewTab) {
+    // if (isInternalLink && !props.openInNewTab) {
     return (
       <NextLink href={href} passHref>
-        <Link color={color[colorMode]} {...props.otherProps}>
+        <Link {...props} color={color[colorMode]}>
           {props.children}
         </Link>
       </NextLink>
@@ -32,13 +34,7 @@ const CustomLink = (props: CustomLinkProps) => {
   }
 
   return (
-    <Link
-      color={color[colorMode]}
-      href={props.href}
-      target={props.openInNewTab ? '_blank' : '_self'}
-      isExternal={true}
-      {...props.otherProps}
-    >
+    <Link {...props} color={color[colorMode]} isExternal={true}>
       {props.children}
     </Link>
   );
