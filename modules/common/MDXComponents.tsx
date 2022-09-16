@@ -8,7 +8,7 @@ import {
   Divider,
   useColorMode,
 } from '@chakra-ui/react';
-import { MDXProviderComponents } from '@mdx-js/react';
+import type { MDXProviderComponents } from '@mdx-js/react';
 import CustomLink from './CustomLink';
 
 const Quote = (props: any) => {
