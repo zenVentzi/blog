@@ -46,26 +46,21 @@ const Hr = () => {
   return <Divider borderColor={borderColor[colorMode]} my={4} w="100%" />;
 };
 
+const Spacing = (props) => {
+  return (<><br />{props.children}</>)
+}
+
 const MDXComponents = {
   /* eslint-disable react/display-name */
   // can fix by:
 
-  // h1: function h1(props) {
-  //   return <Heading as="h1" size="xl" my={4} {...props} />;
-  // },
-
-  // h1: (props) => <Heading as="h1" size="xl" {...props} />,
-  // h2: (props) => <Heading as="h2" size="lg" fontWeight="bold" {...props} />,
-  // h3: (props) => <Heading as="h3" size="md" fontWeight="bold" {...props} />,
-  // h4: (props) => <Heading as="h4" size="sm" fontWeight="bold" {...props} />,
-  // h5: (props) => <Heading as="h5" size="sm" fontWeight="bold" {...props} />,
-  // h6: (props) => <Heading as="h6" size="xs" fontWeight="bold" {...props} />,
   h1: (props) => <Heading as="h1" size="md" {...props} />,
-  h2: (props) => <Heading as="h2" size="sm" fontWeight="bold" {...props} />,
-  h3: (props) => <Heading as="h3" size="xs" fontWeight="bold" {...props} />,
-  h4: (props) => <Heading as="h4" size="xs" fontWeight="bold" {...props} />,
-  h5: (props) => <Heading as="h5" size="xs" fontWeight="bold" {...props} />,
-  h6: (props) => <Heading as="h6" size="xs" fontWeight="bold" {...props} />,
+  // h1: (props) => <Spacing><Heading as="h1" size="md" {...props} /></Spacing>,
+  h2: (props) => <Spacing><Heading as="h2" size="sm" fontWeight="bold" {...props} /></Spacing>,
+  h3: (props) => <Spacing><Heading as="h3" size="xs" fontWeight="bold" {...props} /></Spacing>,
+  h4: (props) => <Spacing><Heading as="h4" size="xs" fontWeight="bold" {...props} /></Spacing>,
+  h5: (props) => <Spacing><Heading as="h5" size="xs" fontWeight="bold" {...props} /></Spacing>,
+  h6: (props) => <Spacing><Heading as="h6" size="xs" fontWeight="bold" {...props} /></Spacing>,
   inlineCode: (props) => (
     <Code colorScheme="yellow" fontSize="0.84em" {...props} />
   ),
