@@ -1,4 +1,14 @@
-import { Box, Text, Flex, Divider, Stack, VStack, Checkbox, Center, HStack } from '@chakra-ui/react';
+import {
+  Box,
+  Text,
+  Flex,
+  Divider,
+  Stack,
+  VStack,
+  Checkbox,
+  Center,
+  HStack,
+} from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 import { useEffect } from 'react';
 import { NextSeo } from 'next-seo';
@@ -37,32 +47,36 @@ const getOrderedPosts = (unOrderedPosts: Posts): Posts => {
   return orderedPosts;
 };
 
-const getFilteredPosts = (unfilteredPosts: Posts, showPro: boolean, showPersonal: boolean): Posts => {
+const getFilteredPosts = (
+  unfilteredPosts: Posts,
+  showPro: boolean,
+  showPersonal: boolean
+): Posts => {
   if (showPro && showPersonal) return unfilteredPosts;
 
-  const isAbout = (tag: string) => tag == "about";
+  const isAbout = (tag: string) => tag == 'about';
 
   if (showPro) {
-    const isPro = (tag: string) => tag == "pro";
+    const isPro = (tag: string) => tag == 'pro';
 
-    const filteredPosts = unfilteredPosts.filter(p => {
+    const filteredPosts = unfilteredPosts.filter((p) => {
       return p.tags.some(isAbout) || p.tags.some(isPro);
-    })
+    });
 
     return filteredPosts;
-  }
-  else if (showPersonal) {
-    const isPersonal = (tag: string) => tag == "personal";
+  } else if (showPersonal) {
+    const isPersonal = (tag: string) => tag == 'personal';
 
-    const filteredPosts = unfilteredPosts.filter(p => {
+    const filteredPosts = unfilteredPosts.filter((p) => {
       return p.tags.some(isAbout) || p.tags.some(isPersonal);
-    })
+    });
 
     return filteredPosts;
-  } else { // none selected
-    return unfilteredPosts.filter(p => p.tags.some(isAbout));
+  } else {
+    // none selected
+    return unfilteredPosts.filter((p) => p.tags.some(isAbout));
   }
-}
+};
 
 type IndexProps = {
   posts: SerializedPost[];
@@ -72,11 +86,15 @@ type IndexProps = {
 const Index = ({ posts, meta }: IndexProps) => {
   const [showPro, setShowPro] = useState(true);
   const [showPersonal, setShowPersonal] = useState(true);
-  const [orderedPosts, setOrderedPosts] = useState(getOrderedPosts(getFilteredPosts(posts, showPro, showPersonal)));
+  const [orderedPosts, setOrderedPosts] = useState(
+    getOrderedPosts(getFilteredPosts(posts, showPro, showPersonal))
+  );
 
   useEffect(() => {
-    setOrderedPosts(getOrderedPosts(getFilteredPosts(posts, showPro, showPersonal)));
-  }, [showPro, showPersonal])
+    setOrderedPosts(
+      getOrderedPosts(getFilteredPosts(posts, showPro, showPersonal))
+    );
+  }, [showPro, showPersonal]);
 
   return (
     <div>
@@ -101,14 +119,20 @@ const Index = ({ posts, meta }: IndexProps) => {
             </HStack>
           }
         >
-          <Stack spacing={5} direction='row'>
-            <Text fontSize='xl'>Posts tagged: </Text>
-            <Checkbox /* colorScheme='red' */ defaultChecked={showPro} onChange={(e) => {
-              setShowPro(e.target.checked);
-            }}>
+          <Stack spacing={5} direction="row">
+            <Text fontSize="xl">Posts tagged: </Text>
+            <Checkbox
+              /* colorScheme='red' */ defaultChecked={showPro}
+              onChange={(e) => {
+                setShowPro(e.target.checked);
+              }}
+            >
               Professional
             </Checkbox>
-            <Checkbox /* colorScheme='green' */ defaultChecked={showPersonal} onChange={e => setShowPersonal(e.target.checked)}>
+            <Checkbox
+              /* colorScheme='green' */ defaultChecked={showPersonal}
+              onChange={(e) => setShowPersonal(e.target.checked)}
+            >
               Personal
             </Checkbox>
           </Stack>
@@ -119,7 +143,7 @@ const Index = ({ posts, meta }: IndexProps) => {
         <div style={{ background: 'red' }}>teeeeeest</div> */}
         </VStack>
       </Center>
-    </div >
+    </div>
   );
 };
 
