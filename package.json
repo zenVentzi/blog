@@ -22,7 +22,7 @@
     "gravatar": "^1.8.1",
     "gray-matter": "^4.0.3",
     "next": "latest",
-    "next-mdx-remote": "^3.0.2",
+    "next-mdx-remote": "^4.1.0",
     "next-seo": "^4.26.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
