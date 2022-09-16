@@ -1,5 +1,6 @@
-import { Box, Flex, Divider, VStack, Center, HStack } from '@chakra-ui/react';
+import { Box, Text, Flex, Divider, Stack, VStack, Checkbox, Center, HStack } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
+import { useEffect } from 'react';
 import { NextSeo } from 'next-seo';
 import * as contentful from 'contentful';
 import { format, compareDesc } from 'date-fns';
@@ -36,13 +37,46 @@ const getOrderedPosts = (unOrderedPosts: Posts): Posts => {
   return orderedPosts;
 };
 
+const getFilteredPosts = (unfilteredPosts: Posts, showPro: boolean, showPersonal: boolean): Posts => {
+  if (showPro && showPersonal) return unfilteredPosts;
+
+  const isAbout = (tag: string) => tag == "about";
+
+  if (showPro) {
+    const isPro = (tag: string) => tag == "pro";
+
+    const filteredPosts = unfilteredPosts.filter(p => {
+      return p.tags.some(isAbout) || p.tags.some(isPro);
+    })
+
+    return filteredPosts;
+  }
+  else if (showPersonal) {
+    const isPersonal = (tag: string) => tag == "personal";
+
+    const filteredPosts = unfilteredPosts.filter(p => {
+      return p.tags.some(isAbout) || p.tags.some(isPersonal);
+    })
+
+    return filteredPosts;
+  } else { // none selected
+    return unfilteredPosts.filter(p => p.tags.some(isAbout));
+  }
+}
+
 type IndexProps = {
   posts: SerializedPost[];
   meta: IndexMeta;
 };
 
 const Index = ({ posts, meta }: IndexProps) => {
-  const [orderedPosts] = useState(getOrderedPosts(posts));
+  const [showPro, setShowPro] = useState(true);
+  const [showPersonal, setShowPersonal] = useState(true);
+  const [orderedPosts, setOrderedPosts] = useState(getOrderedPosts(getFilteredPosts(posts, showPro, showPersonal)));
+
+  useEffect(() => {
+    setOrderedPosts(getOrderedPosts(getFilteredPosts(posts, showPro, showPersonal)));
+  }, [showPro, showPersonal])
 
   return (
     <div>
@@ -67,6 +101,17 @@ const Index = ({ posts, meta }: IndexProps) => {
             </HStack>
           }
         >
+          <Stack spacing={5} direction='row'>
+            <Text fontSize='xl'>Posts tagged: </Text>
+            <Checkbox /* colorScheme='red' */ defaultChecked={showPro} onChange={(e) => {
+              setShowPro(e.target.checked);
+            }}>
+              Professional
+            </Checkbox>
+            <Checkbox /* colorScheme='green' */ defaultChecked={showPersonal} onChange={e => setShowPersonal(e.target.checked)}>
+              Personal
+            </Checkbox>
+          </Stack>
           {orderedPosts.map((post) => {
             return <BlogPostPreview key={post.slug} post={post} />;
           })}
@@ -74,7 +119,7 @@ const Index = ({ posts, meta }: IndexProps) => {
         <div style={{ background: 'red' }}>teeeeeest</div> */}
         </VStack>
       </Center>
-    </div>
+    </div >
   );
 };
 
