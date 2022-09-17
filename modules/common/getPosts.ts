@@ -68,7 +68,8 @@ const getPosts = async (options?: GetPostsOptions) => {
       const showReadMoreButton = contentPreview.length < content.length;
 
       if (showReadMoreButton) {
-        contentPreview += `<a href="/blog/${data.slug}"> Read more </a>`;
+        // contentPreview += `<a href="/blog/${data.slug}"> Read more </a>`;
+        contentPreview += `... [Read more](/blog/${data.slug})`;
       }
 
       if (!data || checkObjectEmpty(data)) {
