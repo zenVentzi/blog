@@ -22,6 +22,8 @@ import { SerializedPost, UnserializedPost } from '../modules/common/types';
 import { IndexMeta } from '../modules/index/types';
 import getPosts from '../modules/common/getPosts';
 
+// test commit
+
 const contentfulClient = contentful.createClient({
   // FIXME
   space: process.env.CONTENTFUL_SPACE_ID as string,
