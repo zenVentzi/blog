@@ -87,7 +87,7 @@ const getPosts = async (options?: GetPostsOptions) => {
         contentPreview,
         slug: data.slug,
         meta: data.meta,
-        unlisted: data.unlisted,
+        unlisted: data.unlisted ?? false,
       };
     });
 
