@@ -13,6 +13,7 @@ export type SerializedPost = {
   contentPreview: MDXRemoteSerializeResult;
   content: MDXRemoteSerializeResult;
   slug: string;
+  unlisted?: boolean;
   meta: PostMeta;
 };
 
@@ -23,6 +24,7 @@ export type UnserializedPost = {
   contentPreview: string;
   content: string;
   slug: string;
+  unlisted?: boolean;
   meta: PostMeta;
 };
 

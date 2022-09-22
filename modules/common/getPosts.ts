@@ -87,21 +87,24 @@ const getPosts = async (options?: GetPostsOptions) => {
         contentPreview,
         slug: data.slug,
         meta: data.meta,
+        unlisted: data.unlisted,
       };
     });
 
   const serializedPosts: SerializedPost[] = await Promise.all(
-    unserializedPosts.map(async (unPost) => {
-      const serializedContent = await serialize(unPost.content);
-      const serializedContentPreview = await serialize(unPost.contentPreview);
-      const serializedPost: SerializedPost = {
-        ...unPost,
-        content: serializedContent,
-        contentPreview: serializedContentPreview,
-      };
+    unserializedPosts
+      .filter((p) => !p.unlisted)
+      .map(async (p) => {
+        const serializedContent = await serialize(p.content);
+        const serializedContentPreview = await serialize(p.contentPreview);
+        const serializedPost: SerializedPost = {
+          ...p,
+          content: serializedContent,
+          contentPreview: serializedContentPreview,
+        };
 
-      return serializedPost;
-    })
+        return serializedPost;
+      })
   );
 
   return serializedPosts;
