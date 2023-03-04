@@ -1,8 +1,7 @@
 import { GetStaticProps } from 'next';
 import React from 'react';
 // import * as contentful from 'contentful';
-import matter from 'gray-matter';
-import { serialize } from 'next-mdx-remote/serialize';
+// import matter from 'gray-matter';
 import AboutPage, { AboutPageProps } from '../modules/about/AboutPage';
 import { getAboutPageData } from '../modules/about/getAboutPageData';
 

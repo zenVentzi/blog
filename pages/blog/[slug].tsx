@@ -1,7 +1,6 @@
 import { Box, Center, Heading } from '@chakra-ui/layout';
 import * as contentful from 'contentful';
 import { NextSeo } from 'next-seo';
-import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import matter from 'gray-matter';
@@ -12,6 +11,7 @@ import PostTags from '../../modules/common/PostTags';
 import { Divider } from '@chakra-ui/react';
 import useAboutBlogWarning from '../../modules/blog/slug/useAboutBlogWarning';
 import AboutBlogWarning from '../../modules/blog/slug/AboutBlogWarning';
+import { mdSerialize } from '../../modules/common/mdSerializer';
 
 const contentfulClient = contentful.createClient({
   // FIXME
@@ -112,9 +112,9 @@ export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
 
   // // TODO: if null, redirect or do something
   // }
+  const serializedContent = await mdSerialize(unserializedPost.content);
 
-  const serializedContent = await serialize(unserializedPost.content);
-  const serializedContentPreview = await serialize(
+  const serializedContentPreview = await mdSerialize(
     unserializedPost.contentPreview
   );
 

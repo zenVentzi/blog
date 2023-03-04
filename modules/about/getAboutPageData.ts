@@ -1,7 +1,7 @@
 import * as contentful from 'contentful';
 import matter from 'gray-matter';
-import { serialize } from 'next-mdx-remote/serialize';
 import getAvatarUrl from '../common/getAvatarUrl';
+import { mdSerialize } from '../common/mdSerializer';
 import { SerializedAbout, UnserializedAbout } from '../common/types';
 import { AboutPageProps } from './AboutPage';
 
@@ -39,7 +39,7 @@ export const getAboutPageData = async (
 
   if (!unserializedAbout) return null;
 
-  const serializedContent = await serialize(unserializedAbout.content);
+  const serializedContent = await mdSerialize(unserializedAbout.content);
 
   const serializedAbout: SerializedAbout = {
     ...unserializedAbout,

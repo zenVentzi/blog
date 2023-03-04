@@ -1,7 +1,7 @@
 import * as contentful from 'contentful';
-import { serialize } from 'next-mdx-remote/serialize';
 import matter from 'gray-matter';
 import checkObjectEmpty from './checkObjectEmpty';
+import { mdSerialize } from './mdSerializer';
 import { SerializedPost, UnserializedPost } from './types';
 
 type GetPostsOptions = {
@@ -95,8 +95,8 @@ const getPosts = async (options?: GetPostsOptions) => {
     unserializedPosts
       .filter((p) => !p.unlisted)
       .map(async (p) => {
-        const serializedContent = await serialize(p.content);
-        const serializedContentPreview = await serialize(p.contentPreview);
+        const serializedContent = await mdSerialize(p.content);
+        const serializedContentPreview = await mdSerialize(p.contentPreview);
         const serializedPost: SerializedPost = {
           ...p,
           content: serializedContent,

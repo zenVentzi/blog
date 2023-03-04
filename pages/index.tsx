@@ -15,7 +15,6 @@ import { NextSeo } from 'next-seo';
 import * as contentful from 'contentful';
 import { format, compareDesc } from 'date-fns';
 import matter from 'gray-matter';
-import { serialize } from 'next-mdx-remote/serialize';
 import React, { useState } from 'react';
 import BlogPostPreview from '../modules/index/BlogPostPreview';
 import { SerializedPost, UnserializedPost } from '../modules/common/types';
